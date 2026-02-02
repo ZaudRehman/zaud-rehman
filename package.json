@@ -1,0 +1,24 @@
+{
+  "name": "the-engineers-sketchbook",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31",
+    "tailwindcss": "^3.3.5",
+    "vite": "^7.3.1"
+  },
+  "dependencies": {
+    "@gsap/react": "^2.0.0",
+    "gsap": "^3.14.2",
+    "lenis": "^1.0.29",
+    "phaser": "^3.90.0",
+    "three": "^0.182.0"
+  }
+}
