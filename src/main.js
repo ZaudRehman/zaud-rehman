@@ -6,7 +6,8 @@ import Lenis from 'lenis';
 
 // Components
 import Hero from './components/Hero';
-import Manifesto from './components/Manifesto';
+import Manifesto, { initManifesto } from './components/Manifesto';
+import TechStack, { initTechStack } from './components/TechStack';
 import ProjectsGrid from './components/ProjectsGrid';
 import ErraLab from './components/ErraLab';
 import BloomCraftLab from './components/BloomCraftLab';
@@ -22,9 +23,7 @@ gsap.registerPlugin(TextPlugin, ScrollTrigger);
 
 let lenis;
 
-// 1. Initialize App on DOM Ready
 document.addEventListener('DOMContentLoaded', () => {
-  // Render App Structure
   document.querySelector('#app').innerHTML = `
     ${BootSequence()}
     ${InkCanvas()}
@@ -34,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     <main class="relative z-10 opacity-0" id="main-content">
       ${Hero()}
       ${Manifesto()}
+      ${TechStack()}
       ${ErraLab()}
       ${ProjectsGrid()}
       ${BloomCraftLab()}
@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ${PoetryDrawer()}
   `;
 
-  // 2. Initialize Core Systems
   lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -57,10 +56,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   requestAnimationFrame(raf);
 
-  // 3. Start Boot Sequence
   runBootSequence(() => {
-    // A. Reveal Main Content
     const main = document.getElementById('main-content');
+
     if (main) {
       gsap.to(main, {
         opacity: 1,
@@ -69,42 +67,52 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
 
-    // B. Start Ambient Systems
     initInk();
     initDayNight();
     initWind(lenis);
+    initManifesto();
+    initTechStack();
 
-    // C. Trigger Hero Animations
-    const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
+    runHeroIntro();
+    initScrollAnimations();
+    setupInteractions();
 
-    if (document.getElementById('hero-poem')) {
-      tl.to('#hero-poem', {
-        duration: 3.5,
+    ScrollTrigger.refresh();
+  });
+});
+
+function runHeroIntro() {
+  const poem = document.getElementById('hero-poem');
+  if (!poem) return;
+
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+  tl.to('#hero-name', { opacity: 1, y: 0, duration: 1.5 })
+    .to('#hero-line', { opacity: 1, width: '3rem', duration: 0.8 }, '-=1')
+    .to('#hero-role', { opacity: 1, y: 0, duration: 1 }, '-=0.8')
+    .to('#hero-sub', { opacity: 1, duration: 1 }, '-=0.6')
+    .to(
+      '#hero-note-container',
+      { opacity: 1, y: 0, duration: 1.2, ease: 'back.out(1.2)' },
+      '-=0.5'
+    )
+    .to(
+      '#hero-poem',
+      {
+        duration: 3,
         text: {
           value: `"Logic binds the stars in trace,<br>Yet chaos finds a quiet place."`,
           delimiter: '',
         },
         ease: 'none',
-      })
-        .to('#hero-name', { opacity: 1, y: 0, duration: 1 }, '+=0.3')
-        .to('#hero-role', { opacity: 1, y: 0, duration: 0.8 }, '-=0.6')
-        .to('#hero-sub', { opacity: 1, duration: 1 }, '-=0.4');
-    }
-
-    // D. Initialize Scroll Triggers
-    initScrollAnimations();
-
-    // E. Setup Global Interactions
-    setupInteractions();
-  });
-});
-
-// --- Helper Functions ---
+      },
+      '-=0.5'
+    );
+}
 
 function initScrollAnimations() {
-  // Ink blot parallax
   ScrollTrigger.create({
-    trigger: 'body',
+    trigger: document.body,
     start: 'top top',
     end: 'bottom bottom',
     onUpdate: (self) => {
@@ -114,11 +122,11 @@ function initScrollAnimations() {
     },
   });
 
-  // Reveal animations for sections
   const revealElements = document.querySelectorAll('section > *');
+
   revealElements.forEach((elem) => {
-    // Skip hero internals to avoid conflicts
     if (elem.closest('section')?.querySelector('#hero-name')) return;
+    if (elem.closest('#manifesto-petals')) return;
 
     gsap.from(elem, {
       scrollTrigger: {
@@ -129,12 +137,12 @@ function initScrollAnimations() {
       opacity: 0,
       duration: 1,
       ease: 'power3.out',
+      clearProps: 'transform,opacity',
     });
   });
 }
 
 function setupInteractions() {
-  // Drawer Logic
   const drawer = document.getElementById('poetry-drawer');
   const overlay = document.getElementById('drawer-overlay');
   const openBtn = document.getElementById('poetry-trigger');
@@ -149,14 +157,14 @@ function setupInteractions() {
       drawer.classList.add('drawer-open');
       overlay.style.pointerEvents = 'auto';
       overlay.style.opacity = '1';
-      lenis.stop();
+      lenis?.stop();
       document.body.style.overflow = 'hidden';
     } else {
       drawer.classList.add('drawer-closed');
       drawer.classList.remove('drawer-open');
       overlay.style.pointerEvents = 'none';
       overlay.style.opacity = '0';
-      lenis.start();
+      lenis?.start();
       document.body.style.overflow = '';
     }
   }
@@ -170,7 +178,6 @@ function setupInteractions() {
     drawerContent.addEventListener('wheel', (e) => e.stopPropagation(), { passive: false });
   }
 
-  // Erra Visualizer Logic
   const triggerErraBtn = document.getElementById('trigger-erra-btn');
   const erraEmptyState = document.getElementById('erra-empty-state');
   const erraTraceContainer = document.getElementById('erra-trace-container');
@@ -237,17 +244,13 @@ function setupInteractions() {
     });
   }
 
-  // Escape key handler
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (drawer?.classList.contains('drawer-open')) {
-        toggleDrawer(false);
-      }
+    if (e.key === 'Escape' && drawer?.classList.contains('drawer-open')) {
+      toggleDrawer(false);
     }
   });
 }
 
-// Performance optimization: Pause animations when tab not visible
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) {
     gsap.globalTimeline.pause();
@@ -258,5 +261,4 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-// Log initialization complete
 console.log('🌸 Portfolio initialized successfully');

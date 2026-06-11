@@ -498,3 +498,179 @@ body.night-mode .bloomcraft-margin-note {
   min-width: 170px;
   text-align: center;
 }
+
+/* --- Hero & Workbench Tokens --- */
+.hero-scroll-line {
+  animation: scrolldown 2s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+}
+
+@keyframes scrolldown {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+body.night-mode #hero-dragon-seal {
+  opacity: 0.08 !important;
+  color: var(--accent-color) !important;
+}
+
+body.night-mode #hero-branch {
+  opacity: 0.15 !important;
+  color: #a4b5cf !important; /* Cool moonlit blue for the branch */
+}
+
+.hero-note-panel {
+  background: var(--card-bg) !important;
+}
+
+body.night-mode .hero-note-panel {
+  background: 
+    radial-gradient(circle at top right, rgba(143, 169, 214, 0.08), transparent 60%),
+    var(--card-bg) !important;
+  box-shadow: 0 14px 40px var(--shadow-color);
+  border-color: var(--border-color) !important;
+}
+
+/* =============================================
+   MANIFESTO — restrained petal system
+   ============================================= */
+
+#manifesto-petals {
+  z-index: 0;
+}
+
+#manifesto-petals svg {
+  filter: blur(0.15px);
+  will-change: transform, opacity;
+}
+
+body.night-mode #manifesto-petals svg {
+  opacity: 0.85;
+}
+
+.manifesto-wind-line svg {
+  transform-origin: center;
+}
+
+.manifesto-tape {
+  background: var(--tape-color);
+}
+
+body.night-mode #manifesto {
+  background:
+    radial-gradient(circle at 85% 18%, rgba(216, 184, 106, 0.03), transparent 24%),
+    radial-gradient(circle at 16% 72%, rgba(143, 169, 214, 0.04), transparent 28%);
+}
+
+body.night-mode #manifesto .border {
+  border-color: var(--border-color) !important;
+}
+
+body.night-mode #manifesto .bg-sepia\/4 {
+  background-color: rgba(216, 184, 106, 0.05) !important;
+}
+
+body.night-mode #manifesto .bg-sepia\/8 {
+  background-color: rgba(216, 184, 106, 0.08) !important;
+}
+
+body.night-mode #manifesto .border-sepia\/15 {
+  border-color: rgba(216, 184, 106, 0.16) !important;
+}
+
+body.night-mode #manifesto .border-sepia\/20 {
+  border-color: rgba(216, 184, 106, 0.14) !important;
+}
+
+body.night-mode #manifesto .border-sepia\/30 {
+  border-color: rgba(216, 184, 106, 0.22) !important;
+}
+
+body.night-mode #manifesto .text-charcoal\/80 { color: rgba(231, 237, 247, 0.80) !important; }
+body.night-mode #manifesto .text-charcoal\/75 { color: rgba(231, 237, 247, 0.75) !important; }
+body.night-mode #manifesto .text-charcoal\/60 { color: rgba(186, 197, 216, 0.70) !important; }
+body.night-mode #manifesto .text-charcoal\/55 { color: rgba(186, 197, 216, 0.60) !important; }
+body.night-mode #manifesto .text-charcoal\/50 { color: rgba(186, 197, 216, 0.55) !important; }
+
+/* =============================================
+   TECHSTACK — workshop refinements
+   ============================================= */
+
+.techstack-card {
+  background-color: var(--card-bg);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.techstack-card:hover {
+  transform: translateY(-4px) rotate(-0.15deg);
+  box-shadow: 0 16px 36px var(--shadow-color);
+}
+
+.techstack-card-icon {
+  transform-origin: center;
+  transition: transform 0.22s ease;
+}
+
+.techstack-tool {
+  border-radius: 2px;
+  transition: background 0.15s ease;
+}
+
+.techstack-tool:hover {
+  background: rgba(139, 115, 85, 0.06);
+}
+
+body.night-mode .techstack-card {
+  background-color: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+}
+
+body.night-mode .techstack-card:hover {
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 18px 40px var(--shadow-color);
+}
+
+body.night-mode .techstack-tool:hover {
+  background: rgba(216, 184, 106, 0.07) !important;
+}
+
+body.night-mode #techstack .text-charcoal\/70 { color: rgba(186, 197, 216, 0.75) !important; }
+body.night-mode #techstack .text-charcoal\/50 { color: rgba(186, 197, 216, 0.52) !important; }
+body.night-mode #techstack h2,
+body.night-mode #techstack h3 { color: var(--text-primary) !important; }
+
+body.night-mode #techstack .bg-grid-pattern {
+  opacity: 0.04 !important;
+}
+
+body.night-mode #techstack .border-charcoal\/10 {
+  border-color: var(--border-color) !important;
+}
+
+body.night-mode #techstack .border-charcoal\/8 {
+  border-color: rgba(155, 178, 214, 0.10) !important;
+}
+
+body.night-mode #techstack .bg-sepia\/15 {
+  background-color: rgba(216, 184, 106, 0.10) !important;
+}
+
+body.night-mode .techstack-tool .border-sepia\/20 {
+  border-color: rgba(216, 184, 106, 0.22) !important;
+}
+
+/* =============================================
+   HERO — note polish
+   ============================================= */
+
+.hero-note-panel {
+  background: var(--card-bg) !important;
+}
+
+body.night-mode .hero-note-panel {
+  background:
+    radial-gradient(circle at top right, rgba(143, 169, 214, 0.08), transparent 60%),
+    var(--card-bg) !important;
+  box-shadow: 0 14px 40px var(--shadow-color);
+  border-color: var(--border-color) !important;
+}
