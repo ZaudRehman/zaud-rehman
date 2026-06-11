@@ -30,6 +30,6 @@ export const poems = {
       roman: "Ishq ke diye, rooh ko jala hai."
      }
     ],
-    translation: "My heart conceals the price of sin, <br> This arrogant love lets no darkness in. <br> In depths where silent shadows turn, <br> The lamps are lit—and the spirits burn."
+    translation: "My heart conceals the price of sin, <br> This arrogant love lets no darkness in. <br> In depths where silent shadows turn, <br> The lamps are lit, and the spirits burn."
   }
 };

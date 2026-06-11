@@ -7,23 +7,73 @@
 :root {
   --bg-color: #f5f1e8;
   --text-primary: #2b2b2b;
-  --text-secondary: #2b2b2bb3; /* charcoal/70 */
+  --text-secondary: rgba(43, 43, 43, 0.70);
   --accent-color: #8b7355;
   --card-bg: #f5f1e8;
-  --paper-grain-opacity: 0.4;
-  
+  --card-bg-soft: #efe7da;
+  --border-color: rgba(139, 115, 85, 0.14);
+  --shadow-color: rgba(69, 53, 36, 0.10);
+  --paper-grain-opacity: 0.32;
+
+  --stamp-border: rgba(122, 47, 47, 0.58);
+  --stamp-text: rgba(122, 47, 47, 0.82);
+  --tape-color: rgba(232, 224, 204, 0.84);
+  --pill-bg: rgba(255, 255, 255, 0.50);
+  --button-solid-bg: #2b2b2b;
+  --button-solid-text: #f5f1e8;
+  --button-solid-hover: #8b7355;
+  --button-outline-hover: rgba(255, 255, 255, 0.60);
+
+  --poetry-drawer-bg: #f0ebd8;
+  --poetry-drawer-border: rgba(139, 115, 85, 0.18);
+  --poetry-title: #2b2b2b;
+  --poetry-line: rgba(43, 43, 43, 0.82);
+  --poetry-urdu: rgba(30, 30, 30, 0.92);
+  --poetry-roman: rgba(139, 115, 85, 0.82);
+  --poetry-translation: rgba(43, 43, 43, 0.62);
+  --poetry-divider: rgba(139, 115, 85, 0.32);
+  --poetry-footer-bg: #f0ebd8;
+  --poetry-close: rgba(43, 43, 43, 0.55);
+  --poetry-close-hover: rgba(43, 43, 43, 0.92);
+  --poetry-overlay: rgba(25, 28, 38, 0.24);
+
   /* Texture */
   --paper-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
 }
 
 /* Night Theme Variables */
 body.night-mode {
-  --bg-color: #0f172a;
-  --text-primary: #e2e8f0;
-  --text-secondary: #94a3b8;
-  --accent-color: #d4af37;
-  --card-bg: #1e293b;
-  --paper-grain-opacity: 0.15;
+  --bg-color: #121826;
+  --text-primary: #e7edf7;
+  --text-secondary: rgba(186, 197, 216, 0.78);
+  --accent-color: #d8b86a;
+  --card-bg: #1b2435;
+  --card-bg-soft: #243047;
+  --border-color: rgba(155, 178, 214, 0.16);
+  --shadow-color: rgba(3, 8, 20, 0.42);
+  --paper-grain-opacity: 0.10;
+
+  --stamp-border: rgba(216, 184, 106, 0.34);
+  --stamp-text: rgba(236, 210, 148, 0.94);
+  --tape-color: rgba(125, 138, 166, 0.30);
+  --pill-bg: rgba(231, 237, 247, 0.06);
+  --button-solid-bg: #253149;
+  --button-solid-text: #edf3fb;
+  --button-solid-hover: #31405d;
+  --button-outline-hover: rgba(155, 178, 214, 0.10);
+
+  --poetry-drawer-bg: #1b2435;
+  --poetry-drawer-border: rgba(155, 178, 214, 0.18);
+  --poetry-title: #f0f5fd;
+  --poetry-line: rgba(223, 232, 245, 0.88);
+  --poetry-urdu: #f5f8ff;
+  --poetry-roman: #d8b86a;
+  --poetry-translation: rgba(198, 210, 229, 0.78);
+  --poetry-divider: rgba(155, 178, 214, 0.24);
+  --poetry-footer-bg: #202a3d;
+  --poetry-close: rgba(211, 221, 237, 0.66);
+  --poetry-close-hover: #ffffff;
+  --poetry-overlay: rgba(10, 14, 24, 0.42);
 }
 
 body {
@@ -31,23 +81,55 @@ body {
   color: var(--text-primary);
   overflow-x: hidden;
   cursor: default;
-  transition: background-color 1.2s ease, color 1.2s ease;
+  transition:
+    background-color 1.2s ease,
+    color 1.2s ease;
+}
+
+body.night-mode {
+  background-image:
+    radial-gradient(circle at 18% 14%, rgba(143, 169, 214, 0.10), transparent 24%),
+    radial-gradient(circle at 82% 8%, rgba(216, 184, 106, 0.05), transparent 18%),
+    linear-gradient(180deg, rgba(18, 24, 38, 0.96) 0%, rgba(15, 21, 34, 1) 100%);
 }
 
 /* Force Text Colors using CSS Variables */
 body.night-mode .text-charcoal { color: var(--text-primary) !important; }
+body.night-mode .text-charcoal\/90 { color: rgba(231, 237, 247, 0.90) !important; }
 body.night-mode .text-charcoal\/80 { color: var(--text-secondary) !important; }
 body.night-mode .text-charcoal\/70 { color: var(--text-secondary) !important; }
 body.night-mode .text-charcoal\/60 { color: var(--text-secondary) !important; }
 body.night-mode .text-charcoal\/50 { color: var(--text-secondary) !important; }
 
 /* Fix Card Backgrounds */
-body.night-mode .bg-paper { background-color: var(--card-bg) !important; }
-body.night-mode .bg-paper-dark\/30 { background-color: rgba(30, 41, 59, 0.5) !important; }
+body.night-mode .bg-paper {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 14px 40px var(--shadow-color);
+}
+
+body.night-mode .bg-paper-dark\/30 {
+  background-color: rgba(27, 36, 53, 0.72) !important;
+}
 
 /* Fix Sepia Accents */
-body.night-mode .text-sepia { color: var(--accent-color) !important; }
-body.night-mode .bg-sepia\/20 { background-color: rgba(212, 175, 55, 0.2) !important; }
+body.night-mode .text-sepia {
+  color: var(--accent-color) !important;
+}
+
+body.night-mode .bg-sepia\/20 {
+  background-color: rgba(216, 184, 106, 0.14) !important;
+}
+
+/* Optional poetry tone in dark mode */
+body.night-mode .text-gold,
+body.night-mode #hero-sub.text-gold {
+  color: #e0c27a !important;
+}
+
+body.night-mode #hero-sub {
+  color: #d9e2f1 !important;
+}
 
 /* Texture Overlay */
 body::before {
@@ -77,15 +159,27 @@ body::before {
   background: radial-gradient(circle at center, #e6e0d4 0%, transparent 70%);
   transform: scale(0.8);
 }
-/* In night mode, make ink blot darker/subtle */
+
+/* In night mode, make ink blot moonlit/subtle */
 body.night-mode #ink-blot-container {
-  background: radial-gradient(circle at center, #1e293b 0%, transparent 70%);
+  background: radial-gradient(circle at center, rgba(53, 71, 104, 0.78) 0%, transparent 72%);
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--bg-color); }
-::-webkit-scrollbar-thumb { background: var(--accent-color); border-radius: 4px; }
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+
+body.night-mode ::-webkit-scrollbar-track {
+  background: #111827;
+}
+
+body.night-mode ::-webkit-scrollbar-thumb {
+  background: #6d7f9e;
+}
 
 /* BloomCraft Stamp */
 .stamp {
@@ -102,6 +196,7 @@ body.night-mode #ink-blot-container {
   stroke-dashoffset: 0;
   transition: stroke-dashoffset 0.6s ease-in-out;
 }
+
 .group:hover .path-anim {
   animation: redraw 0.8s ease-in-out forwards;
 }
@@ -111,4 +206,295 @@ body.night-mode #ink-blot-container {
   40% { stroke-dashoffset: 100; opacity: 0; }
   41% { opacity: 1; }
   100% { stroke-dashoffset: 0; }
+}
+
+/* BloomCraft helpers */
+.bloomcraft-stamp {
+  border-color: var(--stamp-border) !important;
+  color: var(--stamp-text) !important;
+}
+
+.bloomcraft-tape {
+  background: var(--tape-color) !important;
+}
+
+.bloomcraft-pill {
+  background: var(--pill-bg) !important;
+  border-color: var(--border-color) !important;
+}
+
+.bloomcraft-solid-btn {
+  background: var(--button-solid-bg) !important;
+  color: var(--button-solid-text) !important;
+}
+
+.bloomcraft-solid-btn:hover {
+  background: var(--button-solid-hover) !important;
+}
+
+.bloomcraft-outline-btn:hover {
+  background: var(--button-outline-hover) !important;
+}
+
+body.night-mode .bloomcraft-shell {
+  border-color: var(--border-color) !important;
+  box-shadow: 0 18px 42px var(--shadow-color);
+}
+
+body.night-mode .bg-grid-pattern {
+  opacity: 0.06 !important;
+}
+
+body.night-mode .bloomcraft-code {
+  background: #141b29 !important;
+  color: #edf3fb !important;
+  border-color: rgba(155, 178, 214, 0.24) !important;
+}
+
+body.night-mode .bloomcraft-tooltip {
+  background: #202a3d !important;
+  color: #edf3fb !important;
+}
+
+.bloomcraft-tagline {
+  color: rgba(43, 43, 43, 0.90);
+}
+
+body.night-mode .bloomcraft-tagline {
+  color: #dbe5f4;
+}
+
+.bloomcraft-stamp-label {
+  color: var(--stamp-text);
+  text-shadow: none;
+}
+
+body.night-mode .bloomcraft-stamp {
+  background: rgba(216, 184, 106, 0.05);
+  box-shadow: 0 0 0 1px rgba(216, 184, 106, 0.08);
+}
+
+body.night-mode .bloomcraft-stamp-label {
+  color: #edd39a;
+  text-shadow: 0 1px 0 rgba(8, 12, 22, 0.28);
+}
+
+/* Poetry Drawer */
+.poetry-trigger {
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+body.night-mode .poetry-trigger {
+  border-color: rgba(155, 178, 214, 0.22) !important;
+  background: rgba(27, 36, 53, 0.92) !important;
+  box-shadow: 0 18px 36px rgba(3, 8, 20, 0.42);
+}
+
+.poetry-overlay {
+  background: var(--poetry-overlay) !important;
+}
+
+.poetry-drawer {
+  background: var(--poetry-drawer-bg) !important;
+  border-left-color: var(--poetry-drawer-border) !important;
+}
+
+body.night-mode .poetry-drawer {
+  background:
+    radial-gradient(circle at 18% 12%, rgba(150, 176, 220, 0.10), transparent 26%),
+    radial-gradient(circle at 82% 18%, rgba(216, 184, 106, 0.05), transparent 20%),
+    linear-gradient(180deg, rgba(29, 39, 59, 0.98) 0%, rgba(24, 33, 49, 1) 100%) !important;
+}
+
+.poetry-close {
+  color: var(--poetry-close) !important;
+}
+
+.poetry-close:hover {
+  color: var(--poetry-close-hover) !important;
+}
+
+.poetry-title {
+  color: var(--poetry-title) !important;
+}
+
+.poetry-line {
+  color: var(--poetry-line) !important;
+}
+
+.poetry-urdu {
+  color: var(--poetry-urdu) !important;
+  text-shadow: none;
+}
+
+body.night-mode .poetry-urdu {
+  text-shadow: 0 1px 0 rgba(5, 10, 18, 0.25);
+}
+
+.poetry-roman {
+  color: var(--poetry-roman) !important;
+}
+
+.poetry-divider {
+  background: var(--poetry-divider) !important;
+}
+
+.poetry-translation-wrap {
+  border-top-color: var(--poetry-drawer-border) !important;
+}
+
+.poetry-translation {
+  color: var(--poetry-translation) !important;
+}
+
+.poetry-footer {
+  background: var(--poetry-footer-bg) !important;
+  border-top-color: var(--poetry-drawer-border) !important;
+}
+
+body.night-mode .poetry-footer {
+  background:
+    linear-gradient(180deg, rgba(33, 43, 64, 0.96) 0%, rgba(27, 36, 53, 1) 100%) !important;
+}
+
+.poetry-footer-note {
+  color: var(--poetry-roman) !important;
+}
+
+body.night-mode #poetry-drawer {
+  box-shadow: -20px 0 50px rgba(3, 8, 20, 0.48);
+}
+
+/* --- Erra Visualizer Tokens --- */
+:root {
+  --erra-code-bg: #f9f7f1;
+  --erra-highlight: rgba(139, 115, 85, 0.15);
+}
+
+body.night-mode {
+  --erra-code-bg: #141b29;
+  --erra-highlight: rgba(216, 184, 106, 0.15);
+}
+
+.erra-shell {
+  border-color: var(--border-color) !important;
+}
+
+.erra-folio-left, .erra-folio-right {
+  background: var(--card-bg) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Subtle directional moonlit wash for the folios */
+body.night-mode .erra-folio-left {
+  background:
+    radial-gradient(circle at top left, rgba(143, 169, 214, 0.06), transparent 50%),
+    var(--card-bg) !important;
+  box-shadow: 0 14px 40px var(--shadow-color);
+}
+
+body.night-mode .erra-folio-right {
+  background:
+    radial-gradient(circle at bottom right, rgba(216, 184, 106, 0.03), transparent 50%),
+    var(--card-bg) !important;
+  box-shadow: 0 14px 40px var(--shadow-color);
+}
+
+.erra-compass {
+  color: var(--accent-color);
+}
+
+.erra-badge {
+  border-color: var(--border-color) !important;
+  color: var(--text-secondary) !important;
+}
+
+.erra-tagline {
+  color: rgba(43, 43, 43, 0.90);
+}
+
+body.night-mode .erra-tagline {
+  color: #dbe5f4;
+}
+
+.erra-tape {
+  background: var(--tape-color) !important;
+}
+
+.erra-code {
+  background: var(--erra-code-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+.erra-highlight.active {
+  background: var(--erra-highlight);
+}
+
+.erra-solid-btn {
+  background: var(--button-solid-bg) !important;
+  color: var(--button-solid-text) !important;
+}
+
+.erra-solid-btn:hover {
+  background: var(--button-solid-hover) !important;
+}
+
+.erra-outline-btn:hover {
+  background: var(--button-outline-hover) !important;
+}
+
+.bloomcraft-research-shell {
+  border-color: var(--border-color) !important;
+}
+
+.bloomcraft-heading-block {
+  position: relative;
+}
+
+.bloomcraft-seal {
+  color: var(--accent-color);
+}
+
+.bloomcraft-stat {
+  overflow: hidden;
+}
+
+.bloomcraft-stat:hover {
+  transform: translateY(-4px) rotate(-0.2deg);
+}
+
+body.night-mode .bloomcraft-stat {
+  background:
+    radial-gradient(circle at top left, rgba(143, 169, 214, 0.05), transparent 52%),
+    var(--card-bg) !important;
+}
+
+.bloomcraft-main-sheet {
+  overflow: hidden;
+}
+
+body.night-mode .bloomcraft-main-sheet {
+  background:
+    radial-gradient(circle at 85% 18%, rgba(216, 184, 106, 0.04), transparent 22%),
+    radial-gradient(circle at 12% 82%, rgba(143, 169, 214, 0.05), transparent 28%),
+    var(--card-bg) !important;
+}
+
+.bloomcraft-note-item span:last-child {
+  line-height: 1.7;
+}
+
+.bloomcraft-margin-note {
+  box-shadow: 0 10px 24px rgba(69, 53, 36, 0.06);
+}
+
+body.night-mode .bloomcraft-margin-note {
+  background: rgba(27, 36, 53, 0.72) !important;
+  border-color: rgba(155, 178, 214, 0.16) !important;
+  box-shadow: 0 12px 28px rgba(3, 8, 20, 0.32);
+}
+
+.bloomcraft-link-row a {
+  min-width: 170px;
+  text-align: center;
 }
