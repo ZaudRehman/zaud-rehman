@@ -17,7 +17,7 @@ export function initDayNight() {
   // Logic Text vs Poetry Text
   const texts = {
     day: "Specializing in High-Performance Rust, Distributed Systems, and Low-Level Architecture.",
-    night: "In the depths, a shadow of sorrow dwells—yet the lamp of passion burns."
+    night: "Though the night claims every quiet corner,<br>the ember refuses to sleep."
   };
 
   let isNight = false;
@@ -40,7 +40,7 @@ export function initDayNight() {
         opacity: 0,
         duration: 0.5,
         onComplete: () => {
-          heroSub.innerText = texts.night;
+          heroSub.innerHTML = texts.night;
           heroSub.classList.add('italic', 'text-gold'); // Style for poetry
           gsap.to(heroSub, { opacity: 1, duration: 1 });
         }

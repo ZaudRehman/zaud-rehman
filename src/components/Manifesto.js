@@ -5,6 +5,20 @@ export default function Manifesto() {
       <!-- Petal layer -->
       <div id="manifesto-petals" class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true"></div>
 
+      <!-- Right-side sakura branch image -->
+      <div
+        class="absolute right-[-5rem] top-[-2.5rem] hidden lg:block w-[520px] xl:w-[680px] pointer-events-none select-none opacity-[0.82]"
+        aria-hidden="true"
+      >
+        <img
+          src="./Sakura-branch-Photoroom.jpg"
+          alt=""
+          class="w-full h-auto object-contain"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+
       <!-- Vertical mark -->
       <div class="absolute left-0 top-24 bottom-24 w-[3px] bg-sepia/20 rounded-full"></div>
 
@@ -34,13 +48,13 @@ export default function Manifesto() {
         <div class="grid md:grid-cols-2 gap-10 md:gap-16 mb-14">
           <div>
             <p class="font-serif text-lg md:text-xl text-charcoal/80 leading-relaxed mb-6">
-              Currently building
-              <span class="font-mono text-sm text-sepia bg-sepia/8 px-1.5 py-0.5 rounded-sm border border-sepia/15">AchronOS</span>
-              — a deterministic kernel where every cycle is accounted for. I’m also exploring probabilistic data structures in Rust with the same obsession for clarity and control.
+              Right now, I’m building
+              <span class="font-mono text-sm text-sepia bg-sepia/8 px-1.5 py-0.5 rounded-sm border border-sepia/15">AchronOS</span>,
+              a deterministic kernel. I’m also exploring probabilistic data structures in Rust, mostly because I enjoy systems work that rewards precision.
             </p>
 
             <p class="font-serif text-base text-charcoal/60 leading-relaxed">
-              I’m drawn to systems that must hold under pressure: distributed coordination, low-level execution, concurrency, and the strange elegance of performance work.
+              I’m especially drawn to backend and systems problems, distributed coordination, concurrency, low-level execution, and performance work where the details actually matter.
             </p>
           </div>
 
@@ -50,20 +64,21 @@ export default function Manifesto() {
               <span class="font-mono text-[9px] text-sepia/60 tracking-widest uppercase block mb-3">After Hours</span>
 
               <p class="font-serif text-base text-charcoal/75 italic leading-relaxed">
-                I write poetry and ghazals — two collections, 
+                I write too. Mostly poetry.
                 <span class="font-mono text-xs text-sepia not-italic">Gazebound</span>
                 and
-                <span class="font-mono text-xs text-sepia not-italic">Afsaana</span>.
+                <span class="font-mono text-xs text-sepia not-italic">Afsaana</span>
+                are two collections that matter a lot to me.
               </p>
 
               <p class="font-serif text-sm text-charcoal/50 mt-3 leading-relaxed">
-                Engineering without art becomes sterile. Art without discipline dissolves. I care about the place where both remain sharp.
+                For me, writing and programming come from the same place. Both ask for rhythm, restraint, and care.
               </p>
             </div>
 
             <div class="mt-6 pl-4 border-l-2 border-sepia/30">
               <p class="font-serif text-sm text-charcoal/55 italic leading-relaxed">
-                “Afsaana carries Urdu verse — a language that lets memory, grief, and tenderness sit differently.”
+                “To love is to see a universe in a single gaze.<br> To write is simply to leave a lantern burning by its edge.”
               </p>
             </div>
           </div>
@@ -92,6 +107,8 @@ export function initManifesto() {
     'M6,0 C10,1 12,6 9,10 C7,13 2,12 0,8 C-1,4 2,0 6,0Z',
   ];
 
+  const petalColors = ['#f6c8d2', '#ef9fb3', '#fff0f4', '#e9859e'];
+
   let interval = null;
   let hasStarted = false;
 
@@ -106,34 +123,38 @@ export function initManifesto() {
       top:-20px;
       pointer-events:none;
       opacity:0;
+      color:${petalColors[Math.floor(Math.random() * petalColors.length)]};
+      will-change:transform,opacity;
+      filter:blur(${Math.random() > 0.7 ? '0.4px' : '0px'});
     `;
 
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', petalPaths[Math.floor(Math.random() * petalPaths.length)]);
     path.setAttribute('fill', 'currentColor');
-    path.setAttribute('class', 'text-sepia');
     el.appendChild(path);
     container.appendChild(el);
 
-    const drift = (Math.random() - 0.5) * 90;
-    const rot = (Math.random() - 0.5) * 360;
-    const dur = 7 + Math.random() * 4;
+    const drift = (Math.random() - 0.5) * 120;
+    const rot = (Math.random() - 0.5) * 420;
+    const dur = 8 + Math.random() * 5;
 
     import('gsap').then(({ default: gsap }) => {
+      const peakOpacity = 0.16 + Math.random() * 0.13;
+
       gsap.to(el, {
-        y: window.innerHeight * 0.45 + Math.random() * 160,
+        y: window.innerHeight * 0.55 + Math.random() * 180,
         x: drift,
         rotation: rot,
-        opacity: 0.12 + Math.random() * 0.12,
+        opacity: peakOpacity,
         duration: dur,
         ease: 'none',
         onComplete: () => el.remove(),
       });
 
       gsap.to(el, {
-        opacity: 0.12 + Math.random() * 0.12,
-        duration: 0.8,
-        delay: 0.1,
+        opacity: peakOpacity,
+        duration: 1,
+        delay: 0.15,
       });
     });
   }
@@ -143,7 +164,7 @@ export function initManifesto() {
       if (entry.isIntersecting && !hasStarted) {
         hasStarted = true;
         spawnPetal();
-        interval = setInterval(spawnPetal, 1800);
+        interval = setInterval(spawnPetal, window.innerWidth < 768 ? 2600 : 1700);
       } else if (!entry.isIntersecting && interval) {
         clearInterval(interval);
         interval = null;
