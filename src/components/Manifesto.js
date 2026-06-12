@@ -7,16 +7,36 @@ export default function Manifesto() {
 
       <!-- Right-side sakura branch image -->
       <div
-        class="absolute right-[-5rem] top-[-2.5rem] hidden lg:block w-[520px] xl:w-[680px] pointer-events-none select-none opacity-[0.82]"
+        class="absolute right-[-5rem] top-[-2.5rem] hidden lg:block w-[520px] xl:w-[680px] pointer-events-none select-none opacity-[0.84]"
         aria-hidden="true"
       >
-        <img
-          src="public/Sakura branch Manifesto.png"
-          alt=""
-          class="w-full h-auto object-contain"
-          loading="lazy"
-          decoding="async"
-        />
+        <div class="relative">
+          <img
+            src="public/Sakura branch Manifesto.png"
+            alt=""
+            class="w-full h-auto object-contain"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <!-- subtle underside branch line -->
+          <div
+            class="absolute left-[14%] bottom-[1.05rem] h-px w-[62%] rounded-full opacity-80"
+            style="background: linear-gradient(to right, rgba(40,37,29,0), rgba(109,84,64,0.22), rgba(40,37,29,0)); transform: rotate(1.6deg);"
+          ></div>
+
+          <!-- soft shadow under the line -->
+          <div
+            class="absolute left-[19%] bottom-[0.65rem] h-5 w-[50%] blur-md opacity-35"
+            style="background: linear-gradient(to right, rgba(122,97,80,0), rgba(122,97,80,0.22), rgba(122,97,80,0)); transform: rotate(1.6deg);"
+          ></div>
+
+          <!-- bottom fade so the image blends into the paper -->
+          <div
+            class="absolute inset-x-[8%] bottom-0 h-24"
+            style="background: linear-gradient(to bottom, rgba(247,243,234,0) 0%, rgba(247,243,234,0.55) 55%, rgba(247,243,234,0.96) 100%);"
+          ></div>
+        </div>
       </div>
 
       <!-- Vertical mark -->
@@ -113,14 +133,32 @@ export function initManifesto() {
   let hasStarted = false;
 
   function spawnPetal() {
+    const isDesktop = window.innerWidth >= 1024;
+    const isMobile = window.innerWidth < 768;
+
+    const startLeft = isDesktop
+      ? 58 + Math.random() * 34
+      : 8 + Math.random() * 84;
+
+    const size = isDesktop
+      ? 10 + Math.random() * 10
+      : 8 + Math.random() * 8;
+
+    const drift = isDesktop
+      ? (-60 - Math.random() * 130)
+      : (Math.random() - 0.5) * 120;
+
+    const rot = (Math.random() - 0.5) * 420;
+    const dur = isDesktop ? 9 + Math.random() * 4 : 8 + Math.random() * 5;
+
     const el = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     el.setAttribute('viewBox', '-2 -2 22 18');
     el.style.cssText = `
       position:absolute;
-      width:${8 + Math.random() * 8}px;
+      width:${size}px;
       height:auto;
-      left:${10 + Math.random() * 80}%;
-      top:-20px;
+      left:${startLeft}%;
+      top:${isDesktop ? -12 - Math.random() * 20 : -20}px;
       pointer-events:none;
       opacity:0;
       color:${petalColors[Math.floor(Math.random() * petalColors.length)]};
@@ -134,15 +172,13 @@ export function initManifesto() {
     el.appendChild(path);
     container.appendChild(el);
 
-    const drift = (Math.random() - 0.5) * 120;
-    const rot = (Math.random() - 0.5) * 420;
-    const dur = 8 + Math.random() * 5;
-
     import('gsap').then(({ default: gsap }) => {
-      const peakOpacity = 0.16 + Math.random() * 0.13;
+      const peakOpacity = isDesktop
+        ? 0.18 + Math.random() * 0.16
+        : 0.14 + Math.random() * 0.12;
 
       gsap.to(el, {
-        y: window.innerHeight * 0.55 + Math.random() * 180,
+        y: window.innerHeight * 0.58 + Math.random() * 220,
         x: drift,
         rotation: rot,
         opacity: peakOpacity,
@@ -153,18 +189,32 @@ export function initManifesto() {
 
       gsap.to(el, {
         opacity: peakOpacity,
-        duration: 1,
-        delay: 0.15,
+        duration: 0.9,
+        delay: 0.12,
       });
     });
+  }
+
+  function startPetals() {
+    const burstCount = window.innerWidth < 768 ? 4 : 8;
+
+    for (let i = 0; i < burstCount; i++) {
+      setTimeout(spawnPetal, i * 120);
+    }
+
+    interval = setInterval(() => {
+      const clusterCount = window.innerWidth < 768 ? 2 : 3;
+      for (let i = 0; i < clusterCount; i++) {
+        setTimeout(spawnPetal, i * 140);
+      }
+    }, window.innerWidth < 768 ? 1700 : 950);
   }
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting && !hasStarted) {
         hasStarted = true;
-        spawnPetal();
-        interval = setInterval(spawnPetal, window.innerWidth < 768 ? 2600 : 1700);
+        startPetals();
       } else if (!entry.isIntersecting && interval) {
         clearInterval(interval);
         interval = null;

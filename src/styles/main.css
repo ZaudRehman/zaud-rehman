@@ -597,3 +597,84 @@ body.night-mode .poetry-footer {
 body.night-mode #poetry-drawer {
   box-shadow: -20px 0 50px rgba(3, 8, 20, 0.48);
 }
+
+.manifesto-branch-img {
+  filter: saturate(0.98) brightness(1) contrast(0.98);
+}
+
+.manifesto-branch-line {
+  background: linear-gradient(
+    to right,
+    rgba(40, 37, 29, 0),
+    rgba(109, 84, 64, 0.22),
+    rgba(40, 37, 29, 0)
+  );
+  transform: rotate(1.6deg);
+  opacity: 0.8;
+}
+
+.manifesto-branch-shadow {
+  background: linear-gradient(
+    to right,
+    rgba(122, 97, 80, 0),
+    rgba(122, 97, 80, 0.22),
+    rgba(122, 97, 80, 0)
+  );
+  transform: rotate(1.6deg);
+  opacity: 0.35;
+}
+
+.manifesto-branch-fade {
+  background: linear-gradient(
+    to bottom,
+    rgba(247, 243, 234, 0) 0%,
+    rgba(247, 243, 234, 0.55) 55%,
+    rgba(247, 243, 234, 0.96) 100%
+  );
+}
+
+body.night-mode .manifesto-branch-wrap {
+  opacity: 0.78;
+}
+
+body.night-mode .manifesto-branch-img {
+  filter: saturate(0.78) brightness(0.78) contrast(0.92);
+}
+
+body.night-mode .manifesto-branch-line {
+  background: linear-gradient(
+    to right,
+    rgba(205, 190, 170, 0),
+    rgba(167, 132, 108, 0.2),
+    rgba(205, 190, 170, 0)
+  );
+  opacity: 0.55;
+}
+
+body.night-mode .manifesto-branch-shadow {
+  background: linear-gradient(
+    to right,
+    rgba(45, 32, 26, 0),
+    rgba(45, 32, 26, 0.45),
+    rgba(45, 32, 26, 0)
+  );
+  opacity: 0.42;
+}
+
+body.night-mode .manifesto-branch-fade {
+  background: linear-gradient(
+    to bottom,
+    rgba(23, 19, 17, 0) 0%,
+    rgba(23, 19, 17, 0.45) 58%,
+    rgba(23, 19, 17, 0.94) 100%
+  );
+}
+
+body.night-mode .manifesto-branch-night-overlay {
+  display: block;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(246, 200, 210, 0.08), transparent 32%),
+    linear-gradient(to bottom, rgba(24, 20, 18, 0.08), rgba(24, 20, 18, 0.34));
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
