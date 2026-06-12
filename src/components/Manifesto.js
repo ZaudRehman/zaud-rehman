@@ -11,7 +11,7 @@ export default function Manifesto() {
         aria-hidden="true"
       >
         <img
-          src="./Sakura-branch-Photoroom.jpg"
+          src="public/Sakura branch Manifesto.png"
           alt=""
           class="w-full h-auto object-contain"
           loading="lazy"
