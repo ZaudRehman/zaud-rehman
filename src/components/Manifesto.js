@@ -10,32 +10,28 @@ export default function Manifesto() {
         class="absolute right-[-5rem] top-[-2.5rem] hidden lg:block w-[520px] xl:w-[680px] pointer-events-none select-none opacity-[0.84]"
         aria-hidden="true"
       >
-        <div class="relative">
+        <div class="relative manifesto-branch-wrap">
           <img
             src="public/Sakura branch Manifesto.png"
             alt=""
-            class="w-full h-auto object-contain"
+            class="w-full h-auto object-contain manifesto-branch-img"
             loading="lazy"
             decoding="async"
           />
 
+          <div class="manifesto-branch-glow absolute inset-0 hidden rounded-[2.5rem]"></div>
+
           <!-- subtle underside branch line -->
-          <div
-            class="absolute left-[14%] bottom-[1.05rem] h-px w-[62%] rounded-full opacity-80"
-            style="background: linear-gradient(to right, rgba(40,37,29,0), rgba(109,84,64,0.22), rgba(40,37,29,0)); transform: rotate(1.6deg);"
-          ></div>
+          <div class="manifesto-branch-line absolute left-[14%] bottom-[1.05rem] h-px w-[62%] rounded-full"></div>
 
           <!-- soft shadow under the line -->
-          <div
-            class="absolute left-[19%] bottom-[0.65rem] h-5 w-[50%] blur-md opacity-35"
-            style="background: linear-gradient(to right, rgba(122,97,80,0), rgba(122,97,80,0.22), rgba(122,97,80,0)); transform: rotate(1.6deg);"
-          ></div>
+          <div class="manifesto-branch-shadow absolute left-[19%] bottom-[0.65rem] h-5 w-[50%] blur-md"></div>
 
           <!-- bottom fade so the image blends into the paper -->
-          <div
-            class="absolute inset-x-[8%] bottom-0 h-24"
-            style="background: linear-gradient(to bottom, rgba(247,243,234,0) 0%, rgba(247,243,234,0.55) 55%, rgba(247,243,234,0.96) 100%);"
-          ></div>
+          <div class="manifesto-branch-fade absolute inset-x-[8%] bottom-0 h-24"></div>
+
+          <!-- darker night blend -->
+          <div class="manifesto-branch-night-overlay absolute inset-[3%] hidden rounded-[2.5rem]"></div>
         </div>
       </div>
 
@@ -127,14 +123,20 @@ export function initManifesto() {
     'M6,0 C10,1 12,6 9,10 C7,13 2,12 0,8 C-1,4 2,0 6,0Z',
   ];
 
-  const petalColors = ['#f6c8d2', '#ef9fb3', '#fff0f4', '#e9859e'];
+  function getPetalColors() {
+    const isNight = document.body.classList.contains('night-mode');
+    return isNight
+      ? ['#c7929f', '#b97a8a', '#e7c7cf', '#9e6574']
+      : ['#f6c8d2', '#ef9fb3', '#fff0f4', '#e9859e'];
+  }
 
   let interval = null;
   let hasStarted = false;
 
   function spawnPetal() {
     const isDesktop = window.innerWidth >= 1024;
-    const isMobile = window.innerWidth < 768;
+    const isNight = document.body.classList.contains('night-mode');
+    const petalColors = getPetalColors();
 
     const startLeft = isDesktop
       ? 58 + Math.random() * 34
@@ -173,9 +175,11 @@ export function initManifesto() {
     container.appendChild(el);
 
     import('gsap').then(({ default: gsap }) => {
-      const peakOpacity = isDesktop
+      let peakOpacity = isDesktop
         ? 0.18 + Math.random() * 0.16
         : 0.14 + Math.random() * 0.12;
+
+      if (isNight) peakOpacity *= 0.65;
 
       gsap.to(el, {
         y: window.innerHeight * 0.58 + Math.random() * 220,
