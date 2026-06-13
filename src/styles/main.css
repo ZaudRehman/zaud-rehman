@@ -661,13 +661,18 @@ body.night-mode .manifesto-branch-shadow {
   opacity: 0.42;
 }
 
+/* key change: use mask instead of painted fade on night mode */
+body.night-mode .manifesto-branch-wrap {
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 92%);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 92%);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
 body.night-mode .manifesto-branch-fade {
-  background: linear-gradient(
-    to bottom,
-    rgba(23, 19, 17, 0) 0%,
-    rgba(23, 19, 17, 0.45) 58%,
-    rgba(23, 19, 17, 0.94) 100%
-  );
+  display: none;
 }
 
 body.night-mode .manifesto-branch-night-overlay {

@@ -12,7 +12,7 @@ export default function Manifesto() {
       >
         <div class="relative manifesto-branch-wrap">
           <img
-            src="public/Sakura branch Manifesto.png"
+            src="Sakura branch Manifesto.png"
             alt=""
             class="w-full h-auto object-contain manifesto-branch-img"
             loading="lazy"
