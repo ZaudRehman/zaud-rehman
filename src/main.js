@@ -17,6 +17,7 @@ import BootSequence, { runBootSequence } from './components/BootSequence';
 import InkCanvas, { initInk } from './components/InkCanvas';
 import DayNightToggle, { initDayNight } from './components/DayNightCycle';
 import { initWind } from './components/Wind';
+import DotNav, { initDotNav } from './components/DotNav';
 
 // Register GSAP Plugins
 gsap.registerPlugin(TextPlugin, ScrollTrigger);
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ${BootSequence()}
     ${InkCanvas()}
     ${DayNightToggle()}
+    ${DotNav()}
     <div id="ink-blot-container"></div>
 
     <main class="relative z-10 opacity-0" id="main-content">
@@ -72,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initWind(lenis);
     initManifesto();
     initTechStack();
+    initDotNav(lenis);
 
     runHeroIntro();
     initScrollAnimations();

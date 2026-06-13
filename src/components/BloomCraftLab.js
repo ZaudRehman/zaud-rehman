@@ -43,7 +43,7 @@ export default function BloomCraftLab() {
   `).join('');
 
   return `
-    <section class="bloomcraft-research-shell py-32 relative overflow-hidden my-20 border-y border-charcoal/10 bg-paper-dark/30">
+    <section id="bloomcraft" class="bloomcraft-research-shell py-32 relative overflow-hidden my-20 border-y border-charcoal/10 bg-paper-dark/30">
       <div class="absolute inset-0 bg-grid-pattern bg-[length:20px_20px] opacity-20 pointer-events-none"></div>
 
       <div class="max-w-6xl mx-auto px-6 relative z-10">

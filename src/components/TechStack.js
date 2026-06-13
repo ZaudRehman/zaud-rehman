@@ -144,8 +144,6 @@ export default function TechStack() {
       </div>
 
       <div class="flex items-center gap-3 mb-16">
-        <span class="font-mono text-[10px] text-sepia tracking-[0.3em] uppercase">§ 003</span>
-        <div class="h-px w-10 bg-sepia/40"></div>
         <span class="font-mono text-[10px] text-sepia/50 tracking-[0.25em] uppercase">Field Kit</span>
         <div class="h-px flex-1 max-w-xs bg-charcoal/8"></div>
       </div>

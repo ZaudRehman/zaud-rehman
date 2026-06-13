@@ -40,8 +40,6 @@ export default function Manifesto() {
 
       <!-- Section marker -->
       <div class="flex items-center gap-3 mb-16 ml-4">
-        <span class="font-mono text-[10px] text-sepia tracking-[0.3em] uppercase">§ 002</span>
-        <div class="h-px w-10 bg-sepia/40"></div>
         <span class="font-mono text-[10px] text-sepia/50 tracking-[0.25em] uppercase">Philosophy</span>
       </div>
 
@@ -131,7 +129,6 @@ export function initManifesto() {
   }
 
   let interval = null;
-  let hasStarted = false;
 
   function spawnPetal() {
     const isDesktop = window.innerWidth >= 1024;
@@ -216,8 +213,7 @@ export function initManifesto() {
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting && !hasStarted) {
-        hasStarted = true;
+      if (entry.isIntersecting && !interval) {
         startPetals();
       } else if (!entry.isIntersecting && interval) {
         clearInterval(interval);

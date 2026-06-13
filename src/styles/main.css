@@ -635,6 +635,8 @@ body.night-mode #poetry-drawer {
 
 body.night-mode .manifesto-branch-wrap {
   opacity: 0.78;
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 92%);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 92%);
 }
 
 body.night-mode .manifesto-branch-img {
@@ -661,16 +663,6 @@ body.night-mode .manifesto-branch-shadow {
   opacity: 0.42;
 }
 
-/* key change: use mask instead of painted fade on night mode */
-body.night-mode .manifesto-branch-wrap {
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 92%);
-  mask-image: linear-gradient(to bottom, black 50%, transparent 92%);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-}
-
 body.night-mode .manifesto-branch-fade {
   display: none;
 }
@@ -678,8 +670,83 @@ body.night-mode .manifesto-branch-fade {
 body.night-mode .manifesto-branch-night-overlay {
   display: block;
   background:
-    radial-gradient(circle at 35% 30%, rgba(246, 200, 210, 0.08), transparent 32%),
-    linear-gradient(to bottom, rgba(24, 20, 18, 0.08), rgba(24, 20, 18, 0.34));
-  mix-blend-mode: multiply;
-  opacity: 0.9;
+    radial-gradient(circle at 35% 30%, rgba(200, 170, 210, 0.06), transparent 32%),
+    linear-gradient(to bottom, rgba(18, 24, 38, 0.04), rgba(18, 24, 38, 0.22));
+  mix-blend-mode: overlay;
+  opacity: 0.7;
+}
+
+/* ── Global fractional sepia text variants ─────────────────── */
+body.night-mode .text-sepia\/80 { color: rgba(216, 184, 106, 0.8) !important; }
+body.night-mode .text-sepia\/75 { color: rgba(216, 184, 106, 0.75) !important; }
+body.night-mode .text-sepia\/70 { color: rgba(216, 184, 106, 0.7) !important; }
+body.night-mode .text-sepia\/60 { color: rgba(216, 184, 106, 0.6) !important; }
+body.night-mode .text-sepia\/55 { color: rgba(216, 184, 106, 0.55) !important; }
+body.night-mode .text-sepia\/50 { color: rgba(216, 184, 106, 0.5) !important; }
+body.night-mode .text-sepia\/45 { color: rgba(216, 184, 106, 0.45) !important; }
+body.night-mode .text-sepia\/40 { color: rgba(216, 184, 106, 0.4) !important; }
+
+/* ── Global fractional charcoal text variants ──────────────── */
+body.night-mode .text-charcoal\/72 { color: rgba(186, 197, 216, 0.8) !important; }
+body.night-mode .text-charcoal\/40 { color: rgba(186, 197, 216, 0.45) !important; }
+body.night-mode .text-charcoal\/35 { color: rgba(186, 197, 216, 0.38) !important; }
+body.night-mode .text-charcoal\/30 { color: rgba(186, 197, 216, 0.32) !important; }
+body.night-mode .text-charcoal\/15 { color: rgba(186, 197, 216, 0.15) !important; }
+body.night-mode .text-charcoal\/12 { color: rgba(186, 197, 216, 0.12) !important; }
+
+/* ── Global border variants not yet covered ────────────────── */
+body.night-mode .border-charcoal\/12 { border-color: var(--border-color) !important; }
+body.night-mode .border-charcoal\/14 { border-color: var(--border-color) !important; }
+body.night-mode .border-charcoal\/8  { border-color: rgba(155, 178, 214, 0.1) !important; }
+body.night-mode .border-sepia\/18    { border-color: rgba(216, 184, 106, 0.18) !important; }
+body.night-mode .border-sepia\/25    { border-color: rgba(216, 184, 106, 0.22) !important; }
+body.night-mode .divide-charcoal\/8 > * + * { border-color: rgba(155, 178, 214, 0.1) !important; }
+
+/* ── Projects section – night mode ────────────────────────── */
+body.night-mode #projects {
+  background:
+    radial-gradient(circle at 94% 10%, rgba(216, 184, 106, 0.025), transparent 22%),
+    radial-gradient(circle at 6% 85%, rgba(143, 169, 214, 0.035), transparent 28%);
+}
+
+body.night-mode #projects .bg-paper-dark\/20 {
+  background-color: rgba(15, 20, 32, 0.55) !important;
+}
+
+body.night-mode #projects .bg-sepia\/18 {
+  background-color: rgba(216, 184, 106, 0.1) !important;
+}
+
+body.night-mode #projects .bg-grid-pattern {
+  opacity: 0.03 !important;
+}
+
+body.night-mode #projects h3 {
+  color: var(--text-primary) !important;
+}
+
+body.night-mode #projects .hover\:border-sepia\/35:hover {
+  border-color: rgba(216, 184, 106, 0.35) !important;
+}
+
+body.night-mode #projects .hover\:border-sepia\/30:hover {
+  border-color: rgba(216, 184, 106, 0.3) !important;
+}
+
+body.night-mode #projects .hover\:shadow-xl:hover {
+  box-shadow: 0 20px 48px var(--shadow-color) !important;
+}
+
+/* ── Dot nav – night mode ─────────────────────────────────── */
+body.night-mode #dot-nav .dot-nav-label {
+  color: var(--text-secondary);
+}
+
+body.night-mode #dot-nav .dot-nav-dot {
+  background-color: rgba(186, 197, 216, 0.3);
+}
+
+body.night-mode #dot-nav .dot-nav-btn:hover .dot-nav-dot,
+body.night-mode #dot-nav .dot-nav-dot.bg-sepia {
+  background-color: var(--accent-color) !important;
 }

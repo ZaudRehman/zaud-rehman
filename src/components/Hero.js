@@ -1,6 +1,6 @@
 export default function Hero() {
   return `
-    <section class="min-h-screen relative flex items-center px-6 md:px-16 lg:px-24 overflow-hidden border-b border-charcoal/10 pt-20">
+    <section id="hero" class="min-h-screen relative flex items-center px-6 md:px-16 lg:px-24 overflow-hidden border-b border-charcoal/10 pt-20">
       
       <!-- Background Motifs -->
       <div class="absolute top-0 right-0 w-full h-full pointer-events-none overflow-hidden z-0">
