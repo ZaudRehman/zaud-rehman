@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
 // Components
-import Hero from './components/Hero';
+import Hero, { initHeroParallax } from './components/Hero';
 import Manifesto, { initManifesto } from './components/Manifesto';
 import TechStack, { initTechStack } from './components/TechStack';
 import ProjectsGrid from './components/ProjectsGrid';
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initManifesto();
     initTechStack();
     initDotNav(lenis);
-
+    initHeroParallax();
     runHeroIntro();
     initScrollAnimations();
     setupInteractions();

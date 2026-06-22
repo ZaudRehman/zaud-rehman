@@ -83,3 +83,57 @@ export default function Hero() {
     </section>
   `;
 }
+
+export function initHeroParallax() {
+  const section = document.getElementById('hero');
+  const seal = document.getElementById('hero-dragon-seal');
+  const branch = document.getElementById('hero-branch');
+  if (!section || !seal || !branch) return;
+
+  let cx = window.innerWidth / 2;
+  let cy = window.innerHeight / 2;
+  let mx = cx, my = cy;
+  let tx = cx, ty = cy;
+  let rafId = null;
+
+  section.addEventListener('mousemove', (e) => {
+    mx = e.clientX;
+    my = e.clientY;
+  }, { passive: true });
+
+  function tick() {
+    tx += (mx - tx) * 0.06;
+    ty += (my - ty) * 0.06;
+
+    const dx = (tx - cx) / cx; // -1 … +1
+    const dy = (ty - cy) / cy;
+
+    // Seal drifts with cursor — slow, large layer
+    seal.style.transform = `translate(${dx * 18}px, ${dy * 12}px)`;
+
+    // Branch moves against cursor — depth illusion
+    branch.style.transform = `translate(${dx * -10}px, ${dy * -7}px)`;
+
+    rafId = requestAnimationFrame(tick);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        cx = window.innerWidth / 2;
+        cy = window.innerHeight / 2;
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      } else {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    });
+  }, { threshold: 0.1 });
+
+  observer.observe(section);
+
+  window.addEventListener('resize', () => {
+    cx = window.innerWidth / 2;
+    cy = window.innerHeight / 2;
+  }, { passive: true });
+}
