@@ -16,7 +16,6 @@ import PoetryDrawer from './components/PoetryDrawer';
 import BootSequence, { runBootSequence } from './components/BootSequence';
 import InkCanvas, { initInk } from './components/InkCanvas';
 import DayNightToggle, { initDayNight } from './components/DayNightCycle';
-import { initWind } from './components/Wind';
 import DotNav, { initDotNav } from './components/DotNav';
 
 // Register GSAP Plugins
@@ -71,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initInk();
     initDayNight();
-    initWind(lenis);
     initManifesto();
     initTechStack();
     initDotNav(lenis);

@@ -8,19 +8,25 @@ export function initInk() {
 
   const ctx = canvas.getContext('2d');
   let width, height;
-  let trails = [];
-  
+
   // Ink Physics
   const config = {
-    length: 20,      // Length of the trail
-    width: 8,        // Thickness of the brush
-    color: '#2b2b2b',// Charcoal color
-    fade: 0.95,      // How fast ink dries (lower = faster)
+    length: 20,
+    width: 8,
+    fade: 0.95,
   };
 
+  function getInkColor() {
+    return document.body.classList.contains('night-mode') ? '#c5cdd9' : '#2b2b2b';
+  }
+
+  function updateBlendMode() {
+    canvas.style.mixBlendMode = document.body.classList.contains('night-mode') ? 'screen' : 'multiply';
+  }
+
   const mouse = { x: 0, y: 0 };
-  // Track previous mouse position for smooth lines
   const prevMouse = { x: 0, y: 0 };
+  let rafId = null;
 
   function init() {
     width = canvas.width = window.innerWidth;
@@ -28,17 +34,16 @@ export function initInk() {
   }
 
   function animate() {
-    // "Dry" the ink by fading the canvas slightly every frame
-    // This creates the disappearing trail effect
     ctx.globalCompositeOperation = 'destination-out';
     ctx.fillStyle = `rgba(255, 255, 255, ${1 - config.fade})`;
     ctx.fillRect(0, 0, width, height);
     
     ctx.globalCompositeOperation = 'source-over';
     
-    // Draw the fresh ink from previous mouse pos to current
+    const inkColor = getInkColor();
+
     ctx.beginPath();
-    ctx.strokeStyle = config.color;
+    ctx.strokeStyle = inkColor;
     ctx.lineWidth = config.width;
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
@@ -46,26 +51,34 @@ export function initInk() {
     ctx.lineTo(mouse.x, mouse.y);
     ctx.stroke();
 
-    // Add some "splatter" dots occasionally if moving fast
     const speed = Math.hypot(mouse.x - prevMouse.x, mouse.y - prevMouse.y);
     if (speed > 15 && Math.random() > 0.5) {
       const spread = Math.random() * 20 - 10;
-      ctx.fillStyle = config.color;
+      ctx.fillStyle = inkColor;
       ctx.beginPath();
       ctx.arc(mouse.x + spread, mouse.y + spread, Math.random() * 2, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // Update previous position for next frame
     prevMouse.x = mouse.x;
     prevMouse.y = mouse.y;
 
-    requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
+  }
+
+  function start() {
+    if (!rafId) rafId = requestAnimationFrame(animate);
+  }
+
+  function stop() {
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
   }
 
   window.addEventListener('resize', init);
   window.addEventListener('mousemove', (e) => {
-    // If it's the first move, snap prev to current to avoid long lines from (0,0)
     if (prevMouse.x === 0 && prevMouse.y === 0) {
       prevMouse.x = e.clientX;
       prevMouse.y = e.clientY;
@@ -74,6 +87,18 @@ export function initInk() {
     mouse.y = e.clientY;
   });
 
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      stop();
+    } else {
+      start();
+    }
+  });
+
   init();
-  animate();
+  start();
+  updateBlendMode();
+
+  const observer = new MutationObserver(updateBlendMode);
+  observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 }

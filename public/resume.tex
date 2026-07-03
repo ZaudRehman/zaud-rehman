@@ -1,0 +1,184 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\makeatletter
+\ifx\pdfglyphtounicode\undefined
+  \newcommand{\pdfglyphtounicode}[2]{}
+\fi
+\makeatother
+\input{glyphtounicode}
+
+\usepackage[margin=0.35in]{geometry}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\ifdefined\pdfgentounicode
+  \pdfgentounicode=1
+\fi
+
+\newcommand{\resumeItem}[1]{\item\small{#1 \vspace{-2pt}}}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-2pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+%-------------------------------------------
+\begin{document}
+
+%---------- HEADING ----------
+\begin{center}
+    \textbf{\Huge \scshape Zaud Rehman} \\ \vspace{4pt}
+    \small
+    +91 8197652431 $|$
+    \href{mailto:zaudrehman@gmail.com}{zaudrehman@gmail.com} $|$
+    \href{https://zaud-rehman.vercel.app}{zaud-rehman.vercel.app} $|$
+    \href{https://linkedin.com/in/zaud-rehman-31514a288}{linkedin.com/in/zaud-rehman} $|$
+    \href{https://github.com/ZaudRehman}{github.com/ZaudRehman}
+\end{center}
+
+%---------- PROFESSIONAL SUMMARY ----------
+\section{Summary}
+\vspace{1pt}
+\small{Backend software engineer with published open-source Rust crates and a portfolio spanning concurrent WebSocket backends, REST APIs, and lock-free data structures. Comfortable across the full stack, from Rust and Axum backend services to React and Three.js frontends, with a focus on performance and clean API design. }
+
+%---------- EDUCATION ----------
+\section{Education}
+\vspace{1pt}
+\resumeSubHeadingListStart
+    \resumeSubheading
+        {Srinivas University}{Mangaluru, Karnataka, India}
+        {B.Tech in Computer Science Engineering $|$ CGPA: 9.08/10.0}{Dec 2021 -- Apr 2025}
+        \vspace{4pt}
+
+    \resumeSubheading
+        {Karnataka Secondary Education Examination Board (KSEEB)}{Karnataka, India}
+        {12th Grade, Percentage: 80\%}{2020}
+\resumeSubHeadingListEnd
+\vspace{1pt}
+
+%---------- TECHNICAL SKILLS ----------
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+        \textbf{Languages:}{ Rust, Python, Java, C, C++, JavaScript/TypeScript, SQL} \\
+        \textbf{Frameworks \& Technologies:}{ Axum, FastAPI, Django REST, Next.js, WebSocket, REST APIs, React} \\
+        \textbf{Databases \& Caching:}{ PostgreSQL, MongoDB, Redis, SQLx} \\
+        \textbf{Cloud \& Tools:}{ Docker, Git, Oracle Cloud (OCI), JWT Authentication, Microservices, Cargo} \\
+        \textbf{Problem Solving:}{ 643 problems solved on LeetCode; HackerRank Problem Solving (Intermediate) certified}
+    }}
+\end{itemize}
+
+%---------- PROJECTS ----------
+\section{Projects}
+\resumeSubHeadingListStart
+
+    \resumeProjectHeading
+        {\textbf{BloomCraft} $|$ \emph{Rust} $|$ \href{https://github.com/ZaudRehman/bloomcraft}{GitHub} $|$ \href{https://crates.io/crates/bloomcraft}{crates.io}}{Nov 2025 -- Present}
+        \resumeItemListStart
+            \resumeItem{Engineered a \textbf{lock-free concurrent Bloom filter library} supporting \textbf{12 variants} (Standard, Scalable, Partitioned, Sharded, etc.), achieving up to \textbf{~80M insert ops/sec single-threaded} and \textbf{3.1x thread scaling to 62M at 8 threads} with measured FPR of \textbf{~1\% (Standard)} and as low as \textbf{0.02\% (Scalable)} by implementing \texttt{AtomicU64} CAS and \texttt{RwLock}-striped sharding with Lemire's fast range reduction.}
+            \resumeItem{Reduced hash function calls from k to 2 per lookup via \textbf{Kirsch-Mitzenmacher Enhanced Double Hashing}, exposed through a \textbf{pluggable hash-strategy API} (FNV-1a default; WyHash, XXH3, SIMD via feature gates) and \textbf{type-state builder}, with optional HyperLogLog++ cardinality estimation and feature-gated serde support.}
+            \resumeItem{Delivered a \textbf{production-ready crate} covering 12 Bloom filter variants via a single ergonomic API, targeting high-throughput \textbf{concurrent backends} and \textbf{data-pipeline} use cases at scale.}
+        \resumeItemListEnd
+\vspace{2pt}
+
+    \resumeProjectHeading
+        {\textbf{erra} $|$ \emph{Rust} $|$ \href{https://github.com/ZaudRehman/erra}{GitHub} $|$ \href{https://crates.io/crates/erra}{crates.io}}{Jun 2026 -- Present}
+        \resumeItemListStart
+            \resumeItem{Shipped a \textbf{zero-dependency, \texttt{no\_std}-compatible} error-annotation library to crates.io, achieving \textbf{zero-allocation} on the static annotation path by using \texttt{Cow<'static,~str>} and integrated \texttt{std::error::Error} chains.}
+            \resumeItem{Maintained \textbf{MSRV 1.75.0} with \textbf{zero unsafe code}, enabling deployment to \textbf{embedded and WASM targets} without any std dependency, broadening library applicability across resource-constrained and browser runtimes.}
+        \resumeItemListEnd
+\vspace{2pt}
+
+    \resumeProjectHeading
+        {\textbf{NoteFlow} $|$ \emph{Rust, Axum, Next.js 14, PostgreSQL, Redis, WebSocket} $|$ \href{https://noteflow-frontend-phi.vercel.app}{Live} $|$ \href{https://github.com/ZaudRehman/noteflow-backend-v1}{Backend}}{Aug -- Dec 2025}
+        \resumeItemListStart
+            \resumeItem{Scaled a \textbf{real-time collaborative backend} to \textbf{1,000+ concurrent WebSocket connections} at \textbf{sub-100ms latency}, by building a Rust/Axum service with \textbf{connection-pool tuning} and async task management.}
+            \resumeItem{Reduced cross-device sync latency to \textbf{under 1 second} by implementing \textbf{Redis-based rate limiting}, JWT auth with \textbf{refresh-token rotation}, and a Markdown + LaTeX editor with \textbf{incremental state diffing}.}
+        \resumeItemListEnd
+\vspace{2pt}
+
+    \resumeProjectHeading
+        {\textbf{Aesthete} $|$ \emph{React 18, Three.js, Zustand, TailwindCSS} $|$ \href{https://aesthete-six.vercel.app}{Live} $|$ \href{https://github.com/ZaudRehman/aesthete}{GitHub}}{Jan 2026 -- Present}
+        \resumeItemListStart
+            \resumeItem{Built a \textbf{3D algorithm visualization engine} rendering \textbf{25+ algorithms} (DP, Graphs, Sorting) at a \textbf{steady 60 FPS}, by leveraging WebGL, Three.js \textbf{scene-graph batching}, and Zustand for \textbf{minimal re-render overhead}.}
+            \resumeItem{Improved debuggability by designing a \textbf{generator-based \texttt{AlgorithmController}} supporting \textbf{time-travel debugging} and \textbf{frame-perfect stepping}, with synchronized multi-language code highlighting for \textbf{educational tooling} use cases.}
+        \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- EXPERIENCE ----------
+\section{Internships}
+\resumeSubHeadingListStart
+
+    \resumeSubheading
+        {Backend Development Intern}{May 2024 -- Jun 2024}
+        {Tikanga Pvt. Limited}{Mangaluru, Karnataka, India}
+        \resumeItemListStart
+            \resumeItem{Reduced API bug rate by \textbf{15\%} across \textbf{user management, Auth, and business-logic endpoints} built on Django REST Framework, by introducing systematic unit and integration testing and participating in structured code reviews.}
+        \resumeItemListEnd
+
+    \vspace{2pt}
+
+    \resumeSubheading
+        {Artificial Intelligence \& Machine Learning Intern}{Sep 2023}
+        {Thaniya Technologies}{Mangaluru, Karnataka, India}
+        \resumeItemListStart
+            \resumeItem{Improved model prediction accuracy by \textbf{10\%} across a \textbf{10,000+ record} dataset, by building scikit-learn preprocessing pipelines with feature engineering, normalization, and systematic \textbf{hyperparameter tuning} via cross-validation.}
+        \resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+%---------- CERTIFICATIONS ----------
+\section{Certifications}
+\begin{itemize}[leftmargin=0.15in, label={}, topsep=0pt, itemsep=-2pt]
+    \small{\item
+        \textbf{Oracle Cloud Infrastructure 2025 Certified Data Science Professional} -- Oracle (2025) \\
+        \textbf{Problem Solving (Intermediate)} -- HackerRank (2025) \\
+        \textbf{AWS Artificial Intelligence Practitioner Learning} -- Amazon Web Services (2025) \\
+}
+\end{itemize}
+
+\end{document}

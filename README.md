@@ -1,6 +1,6 @@
 # The Engineer's Sketchbook
 
-A Ghibli-inspired portfolio for Zaud Rehman, built with vanilla JavaScript, Vite, and GSAP.
+A Ghibli-inspired portfolio, built with vanilla JavaScript, Vite, and GSAP.
 
 ## Setup
 
@@ -14,7 +14,13 @@ A Ghibli-inspired portfolio for Zaud Rehman, built with vanilla JavaScript, Vite
    npm run dev
    ```
 
-3. **Build for Production**
+3. **Build the Resume PDF**
+   ```bash
+   npm run build:resume
+   ```
+   This generates `public/resume.pdf` from `public/resume.tex` using `tectonic`.
+
+4. **Build for Production**
    ```bash
    npm run build
    ```

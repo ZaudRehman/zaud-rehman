@@ -61,7 +61,10 @@ export default function BloomCraftLab() {
 
             <div class="pl-4 border-l border-sepia/30 ml-2 md:ml-10 relative z-10">
               <p class="font-mono text-[10px] uppercase tracking-[0.24em] text-charcoal/50 mb-3">Research Folio</p>
-              <h2 class="font-serif text-5xl md:text-6xl text-charcoal mb-2">${bloomcraft.title}</h2>
+              <div class="flex items-center gap-5 mb-2">
+              <h2 class="font-serif text-5xl md:text-6xl text-charcoal">${bloomcraft.title}</h2>
+              <span class="erra-badge font-mono text-xs px-2 py-1 rounded-sm border border-charcoal/20 text-charcoal/70 tracking-widest">${bloomcraft.version}</span>
+            </div>
               <h3 class="font-serif text-2xl text-sepia italic mb-4">${bloomcraft.subtitle}</h3>
               <p class="bloomcraft-tagline font-serif text-xl max-w-3xl leading-relaxed">
                 ${bloomcraft.tagline}
@@ -137,6 +140,19 @@ export default function BloomCraftLab() {
                 class="bloomcraft-solid-btn px-6 py-3 font-mono text-sm transition-colors"
               >
                 View on GitHub
+              </a>
+              <a
+                href="${bloomcraft.links.cratesio}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bloomcraft-outline-btn px-6 py-3 border border-charcoal text-charcoal font-mono text-sm transition-colors flex items-center gap-2"
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                  <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                  <line x1="12" y1="22.08" x2="12" y2="12"/>
+                </svg>
+                crates.io
               </a>
               <a
                 href="${bloomcraft.links.documentation}"
