@@ -201,14 +201,21 @@ body.night-mode ::-webkit-scrollbar-thumb { background: #6d7f9e; }
   100% { transform: translateY(100%); }
 }
 
-body.night-mode #hero-dragon-seal {
-  opacity: 0.1;
-  color: var(--accent-color);
+/* Hero sumi-e mountain */
+.hero-day-img {
+  mix-blend-mode: multiply;
+  opacity: 0.18;
+  mask-image: linear-gradient(to right, transparent 0%, black 30%),
+              linear-gradient(to bottom, transparent 0%, black 10%, black 85%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%),
+                      linear-gradient(to bottom, transparent 0%, black 10%, black 85%, transparent 100%);
+  -webkit-mask-composite: source-in;
 }
 
-body.night-mode #hero-branch {
-  opacity: 0.18;
-  color: #a4b5cf;
+body.night-mode .hero-day-img {
+  opacity: 0.1;
+  filter: invert(1) brightness(1.8);
 }
 
 .hero-note-panel {

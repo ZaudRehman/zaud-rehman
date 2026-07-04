@@ -6,11 +6,11 @@ export default function Hero() {
       <div class="absolute top-0 right-0 w-full h-full pointer-events-none overflow-hidden z-0">
         
         <!-- Hero Background Image -->
-        <div class="absolute -right-10 top-[5%] w-[500px] h-[500px] md:w-[600px] md:h-[600px] transition-opacity duration-1000" id="hero-dragon-seal">
+        <div class="absolute right-0 top-[5%] w-[420px] h-[420px] md:w-[520px] md:h-[520px] lg:w-[600px] lg:h-[600px] transition-opacity duration-1000" id="hero-dragon-seal">
           <img
             src="/sumi-e/download (6).jpg"
             alt=""
-            class="hero-day-img w-full h-full object-contain"
+            class="hero-day-img w-full h-full object-contain object-right"
             loading="lazy"
             decoding="async"
           />
