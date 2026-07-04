@@ -74,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initTechStack();
     initDotNav(lenis);
     initHeroParallax();
+    initDraggableNote();
     runHeroIntro();
     initScrollAnimations();
     setupInteractions();
@@ -332,3 +333,94 @@ document.addEventListener('visibilitychange', () => {
 });
 
 console.log('🌸 Portfolio initialized successfully');
+
+function initDraggableNote() {
+  const note = document.getElementById('hero-note-container');
+  const hero = document.getElementById('hero');
+  if (!note || !hero) return;
+
+  const STORAGE_KEY = 'hero-note-pos';
+  let isDragging = false;
+  let startX, startY, startLeft, startTop;
+
+  function clampToHero(left, top) {
+    const nw = note.offsetWidth;
+    const nh = note.offsetHeight;
+    const hw = hero.scrollWidth;
+    const hh = hero.scrollHeight;
+    return {
+      left: Math.max(0, Math.min(hw - nw, left)),
+      top: Math.max(0, Math.min(hh - nh, top)),
+    };
+  }
+
+  // Ensure hero is positioning context
+  const heroPos = getComputedStyle(hero).position;
+  if (heroPos === 'static') hero.style.position = 'relative';
+
+  // Restore saved position
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) {
+    try {
+      const pos = JSON.parse(saved);
+      const clamped = clampToHero(pos.left, pos.top);
+      note.style.position = 'absolute';
+      note.style.left = clamped.left + 'px';
+      note.style.top = clamped.top + 'px';
+      note.style.zIndex = '60';
+      note.style.width = 'auto';
+      note.style.maxWidth = '380px';
+      note.style.margin = '0';
+    } catch {}
+  }
+
+  function onPointerDown(e) {
+    if (e.target.closest('a, button')) return;
+    isDragging = true;
+
+    // Convert from current layout to absolute within hero
+    if (note.style.position !== 'absolute') {
+      const noteRect = note.getBoundingClientRect();
+      const heroRect = hero.getBoundingClientRect();
+      note.style.position = 'absolute';
+      note.style.left = (noteRect.left - heroRect.left + hero.scrollLeft) + 'px';
+      note.style.top = (noteRect.top - heroRect.top + hero.scrollTop) + 'px';
+      note.style.zIndex = '60';
+      note.style.width = 'auto';
+      note.style.maxWidth = '380px';
+      note.style.margin = '0';
+    }
+
+    startX = e.clientX;
+    startY = e.clientY;
+    startLeft = parseFloat(note.style.left);
+    startTop = parseFloat(note.style.top);
+    note.style.transition = 'none';
+    note.style.cursor = 'grabbing';
+    e.preventDefault();
+  }
+
+  function onPointerMove(e) {
+    if (!isDragging) return;
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    const clamped = clampToHero(startLeft + dx, startTop + dy);
+    note.style.left = clamped.left + 'px';
+    note.style.top = clamped.top + 'px';
+  }
+
+  function onPointerUp() {
+    if (!isDragging) return;
+    isDragging = false;
+    note.style.transition = '';
+    note.style.cursor = 'grab';
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      left: parseFloat(note.style.left),
+      top: parseFloat(note.style.top),
+    }));
+  }
+
+  note.addEventListener('pointerdown', onPointerDown);
+  window.addEventListener('pointermove', onPointerMove);
+  window.addEventListener('pointerup', onPointerUp);
+}

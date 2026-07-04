@@ -6,11 +6,18 @@ export default function Hero() {
       <div class="absolute top-0 right-0 w-full h-full pointer-events-none overflow-hidden z-0">
         
         <!-- Hero Background Image -->
-        <div class="absolute right-0 top-[5%] w-[420px] h-[420px] md:w-[520px] md:h-[520px] lg:w-[600px] lg:h-[600px] transition-opacity duration-1000" id="hero-dragon-seal">
+        <div class="absolute right-0 top-[8%] w-[380px] h-[320px] md:w-[550px] md:h-[420px] lg:w-[680px] lg:h-[500px] transition-opacity duration-1000" id="hero-dragon-seal">
           <img
-            src="/sumi-e/download (6).jpg"
+            src="/sumi-e/sumi-e-landscape.png"
             alt=""
-            class="hero-day-img w-full h-full object-contain object-right"
+            class="hero-day-img w-full h-full object-cover object-right"
+            loading="lazy"
+            decoding="async"
+          />
+          <img
+            src="/sumi-e/sumi-e-dragon.png"
+            alt=""
+            class="hero-night-img absolute inset-0 w-full h-full object-contain object-right"
             loading="lazy"
             decoding="async"
           />
@@ -41,16 +48,16 @@ export default function Hero() {
           </p>
         </div>
 
-        <!-- Right: The Pinned Note -->
-        <div class="md:w-5/12 lg:w-1/3 relative mt-12 md:mt-0 opacity-0" id="hero-note-container">
-          <div class="p-8 md:p-10 bg-paper border border-charcoal/10 shadow-md relative rotate-2 hero-note-panel">
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-14 h-5 bg-charcoal/10 rotate-[-3deg]"></div>
+        <!-- The Pinned Note (draggable) -->
+        <div class="md:w-1/3 lg:w-[28%] md:-ml-14 relative mt-12 md:mt-0 opacity-0 cursor-grab active:cursor-grabbing select-none" id="hero-note-container" style="touch-action:none">
+          <div class="p-6 md:p-8 bg-paper border border-charcoal/10 shadow-md relative rotate-2 hero-note-panel transition-shadow duration-300 hover:shadow-lg">
+            <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-4 bg-charcoal/10 rotate-[-3deg]"></div>
             
-            <p class="font-mono text-[10px] uppercase tracking-widest text-sepia mb-6 flex items-center gap-2">
+            <p class="font-mono text-[10px] uppercase tracking-widest text-sepia mb-5 flex items-center gap-2">
               <span class="w-1.5 h-1.5 bg-sepia rounded-full"></span> Entry 01
             </p>
 
-            <div class="h-[120px] font-serif text-xl md:text-2xl text-charcoal/90 italic leading-relaxed" id="hero-poem">
+            <div class="h-[100px] font-serif text-lg md:text-xl text-charcoal/90 italic leading-relaxed" id="hero-poem">
               <!-- GSAP typing target -->
             </div>
           </div>

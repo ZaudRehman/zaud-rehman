@@ -204,18 +204,33 @@ body.night-mode ::-webkit-scrollbar-thumb { background: #6d7f9e; }
 /* Hero sumi-e mountain */
 .hero-day-img {
   mix-blend-mode: multiply;
-  opacity: 0.18;
-  mask-image: linear-gradient(to right, transparent 0%, black 30%),
+  opacity: 0.2;
+  mask-image: linear-gradient(to right, transparent 0%, black 25%),
+              linear-gradient(to bottom, transparent 0%, black 8%, black 90%, transparent 100%);
+  mask-composite: intersect;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 25%),
+                      linear-gradient(to bottom, transparent 0%, black 8%, black 90%, transparent 100%);
+  -webkit-mask-composite: source-in;
+}
+
+.hero-night-img {
+  display: none;
+  mix-blend-mode: screen;
+  opacity: 0.22;
+  mask-image: linear-gradient(to right, transparent 0%, black 20%),
               linear-gradient(to bottom, transparent 0%, black 10%, black 85%, transparent 100%);
   mask-composite: intersect;
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 30%),
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 20%),
                       linear-gradient(to bottom, transparent 0%, black 10%, black 85%, transparent 100%);
   -webkit-mask-composite: source-in;
 }
 
 body.night-mode .hero-day-img {
-  opacity: 0.1;
-  filter: invert(1) brightness(1.8);
+  display: none;
+}
+
+body.night-mode .hero-night-img {
+  display: block;
 }
 
 .hero-note-panel {
