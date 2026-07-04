@@ -11,13 +11,14 @@ export default function Manifesto() {
         aria-hidden="true"
       >
         <div class="relative manifesto-branch-wrap">
-          <img
-            src="Sakura branch Manifesto.png"
-            alt=""
-            class="w-full h-auto object-contain manifesto-branch-img"
-            loading="lazy"
-            decoding="async"
-          />
+<img
+             src="/Sakura branch Manifesto.png"
+             alt="Sakura branch illustration"
+             class="w-full h-auto object-contain manifesto-branch-img"
+             loading="lazy"
+             decoding="async"
+             onError="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22300%22%3E%3Ctext x=%2250%25%22 y=%2250%25%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22 font-family=%22serif%22 font-size=%2224%22 fill=%22%238b7355%22%3ESakura%20Branch%3C/text%3E%3C/svg%3E'"
+           />
 
           <div class="manifesto-branch-glow absolute inset-0 hidden rounded-[2.5rem]"></div>
 

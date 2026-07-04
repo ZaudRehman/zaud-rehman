@@ -16,7 +16,6 @@ import PoetryDrawer from './components/PoetryDrawer';
 import BootSequence, { runBootSequence } from './components/BootSequence';
 import InkCanvas, { initInk } from './components/InkCanvas';
 import DayNightToggle, { initDayNight } from './components/DayNightCycle';
-import { initWind } from './components/Wind';
 import DotNav, { initDotNav } from './components/DotNav';
 
 // Register GSAP Plugins
@@ -71,7 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     initInk();
     initDayNight();
-    initWind(lenis);
     initManifesto();
     initTechStack();
     initDotNav(lenis);
@@ -94,6 +92,7 @@ function runHeroIntro() {
     .to('#hero-line', { opacity: 1, width: '3rem', duration: 0.8 }, '-=1')
     .to('#hero-role', { opacity: 1, y: 0, duration: 1 }, '-=0.8')
     .to('#hero-sub', { opacity: 1, duration: 1 }, '-=0.6')
+    .to('#hero-sub-secondary', { opacity: 1, duration: 0.8 }, '-=0.4')
     .to(
       '#hero-note-container',
       { opacity: 1, y: 0, duration: 1.2, ease: 'back.out(1.2)' },
@@ -252,6 +251,74 @@ function setupInteractions() {
       toggleDrawer(false);
     }
   });
+
+  // Contact modal
+  const contactModal = document.getElementById('contact-modal');
+  const contactOverlay = document.getElementById('contact-overlay');
+  const openContactBtn = document.getElementById('open-contact-modal');
+  const closeContactBtn = document.getElementById('close-contact-modal');
+  const contactForm = document.getElementById('contact-form');
+  const contactStatus = document.getElementById('contact-status');
+
+  function toggleContact(isOpen) {
+    if (!contactModal) return;
+    if (isOpen) {
+      contactModal.classList.remove('hidden');
+      contactModal.classList.add('flex');
+      lenis?.stop();
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => contactOverlay && (contactOverlay.style.opacity = '1'), 10);
+    } else {
+      contactOverlay && (contactOverlay.style.opacity = '0');
+      setTimeout(() => {
+        contactModal.classList.add('hidden');
+        contactModal.classList.remove('flex');
+        lenis?.start();
+        document.body.style.overflow = '';
+        if (contactForm) contactForm.reset();
+        if (contactStatus) contactStatus.textContent = '';
+      }, 200);
+    }
+  }
+
+  if (openContactBtn) openContactBtn.addEventListener('click', () => toggleContact(true));
+  if (closeContactBtn) closeContactBtn.addEventListener('click', () => toggleContact(false));
+  if (contactOverlay) contactOverlay.addEventListener('click', () => toggleContact(false));
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && contactModal && !contactModal.classList.contains('hidden')) {
+      toggleContact(false);
+    }
+  });
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = contactForm.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      if (contactStatus) contactStatus.textContent = 'Sending...';
+
+      try {
+        const resp = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { Accept: 'application/json' },
+        });
+
+        if (resp.ok) {
+          if (contactStatus) contactStatus.textContent = 'Sent! I\'ll get back to you.';
+          contactForm.reset();
+          setTimeout(() => toggleContact(false), 2000);
+        } else {
+          if (contactStatus) contactStatus.textContent = 'Something went wrong. Try again.';
+        }
+      } catch {
+        if (contactStatus) contactStatus.textContent = 'Network error. Try again.';
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    });
+  }
 }
 
 document.addEventListener('visibilitychange', () => {

@@ -35,8 +35,8 @@ export const projects = [
   },
   {
     title: "TaskFlow",
-    hook: "REST API with async ops, JWT auth, and glassmorphism UI — built production-ready.",
-    description: "Task management system with a high-performance async REST API, JWT authentication, and a responsive glassmorphism frontend.",
+    hook: "REST API with async ops, JWT auth, and neo-brutalism UI - built production-ready.",
+    description: "Task management system with a high-performance async REST API, JWT authentication, and a responsive neo-brutalism frontend.",
     tech: ["Python", "FastAPI", "PostgreSQL", "SQLAlchemy", "JavaScript"],
     year: "2024",
     status: "live",
