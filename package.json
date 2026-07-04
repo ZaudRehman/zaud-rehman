@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:resume": "tectonic public/resume.tex -o public",
+    "build:resume": "if command -v tectonic >/dev/null 2>&1; then tectonic public/resume.tex -o public; else echo 'tectonic not available; skipping resume build and using existing public/resume.pdf'; fi",
     "build": "npm run build:resume && vite build",
     "preview": "vite preview"
   },

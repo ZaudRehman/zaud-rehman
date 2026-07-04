@@ -190,7 +190,7 @@ export default function Footer() {
             </div>
 
             <!-- Form -->
-            <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="px-6 pb-6 pt-2 space-y-5">
+            <form id="contact-form" action="https://formspree.io/f/xykqldqa" method="POST" class="px-6 pb-6 pt-2 space-y-5">
               <div class="grid grid-cols-2 gap-x-4 gap-y-5">
                 <div class="contact-input-wrap">
                   <label for="contact-name" class="block font-mono text-[10px] text-charcoal/45 uppercase tracking-[0.15em] mb-2">Name</label>

@@ -201,15 +201,14 @@ body.night-mode ::-webkit-scrollbar-thumb { background: #6d7f9e; }
   100% { transform: translateY(100%); }
 }
 
-/* Hero sumi-e mountain */
-.hero-day-img {
-  mix-blend-mode: multiply;
-  opacity: 0.15;
+body.night-mode #hero-dragon-seal {
+  opacity: 0.1;
+  color: var(--accent-color);
 }
 
-body.night-mode .hero-day-img {
-  opacity: 0.08;
-  filter: invert(1) brightness(1.8);
+body.night-mode #hero-branch {
+  opacity: 0.18;
+  color: #a4b5cf;
 }
 
 .hero-note-panel {
