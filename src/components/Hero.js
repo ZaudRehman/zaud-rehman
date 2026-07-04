@@ -36,28 +36,28 @@ export default function Hero() {
         
         <!-- Left: Identity -->
         <div class="flex-1 pt-10">
-          <div class="overflow-hidden mb-6">
+          <div class="overflow-hidden mb-4">
             <h1 class="text-6xl md:text-8xl lg:text-[110px] font-serif text-charcoal leading-[0.85] tracking-tight opacity-0 translate-y-10" id="hero-name">
               ZAUD<br/>
-              <span class="text-sepia pr-2">REHMAN</span>
+              <span class="text-sepia">REHMAN</span>
             </h1>
           </div>
           
-          <div class="overflow-hidden mb-8 flex items-center gap-4">
-            <div class="w-12 h-[1px] bg-sepia opacity-0 origin-left" id="hero-line"></div>
+          <div class="overflow-hidden mb-6 flex items-center gap-4">
+            <div class="w-0 h-[1px] bg-sepia opacity-0 origin-left" id="hero-line"></div>
             <h2 class="text-lg md:text-xl font-mono text-sepia tracking-[0.2em] uppercase opacity-0 translate-y-10" id="hero-role">
               Backend/Systems Engineer & Poet
             </h2>
           </div>
 
-          <p class="font-mono text-sm text-charcoal/60 max-w-md leading-relaxed opacity-0" id="hero-sub">
+          <p class="font-mono text-sm text-charcoal/70 max-w-md leading-relaxed opacity-0" id="hero-sub">
             Building reliable backends, distributed systems, and low-level software with a bias for clarity, performance, and craft.
           </p>
         </div>
 
         <!-- Right: The Pinned Note -->
-        <div class="md:w-5/12 lg:w-1/3 relative mt-16 md:mt-0 opacity-0" id="hero-note-container">
-          <div class="p-8 md:p-10 bg-paper border border-charcoal/10 shadow-lg relative rotate-2 hero-note-panel">
+        <div class="md:w-5/12 lg:w-1/3 relative mt-12 md:mt-0 opacity-0" id="hero-note-container">
+          <div class="p-8 md:p-10 bg-paper border border-charcoal/10 shadow-md relative rotate-2 hero-note-panel">
             <div class="absolute -top-3 left-1/2 -translate-x-1/2 w-14 h-5 bg-charcoal/10 rotate-[-3deg]"></div>
             
             <p class="font-mono text-[10px] uppercase tracking-widest text-sepia mb-6 flex items-center gap-2">
@@ -72,11 +72,11 @@ export default function Hero() {
       </div>
 
       <!-- Left Edge Scroll Indicator -->
-      <div class="absolute bottom-10 left-6 md:left-16 flex items-center gap-4 opacity-50">
+      <div class="absolute bottom-10 left-6 md:left-16 flex flex-col items-center gap-3 opacity-50">
         <div class="w-[1px] h-16 bg-charcoal/20 overflow-hidden relative">
           <div class="absolute top-0 left-0 w-full h-full bg-charcoal hero-scroll-line"></div>
         </div>
-        <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal -rotate-90 origin-left translate-y-8 translate-x-3">
+        <span class="font-mono text-[10px] uppercase tracking-[0.3em] text-charcoal [writing-mode:vertical-rl]">
           Scroll
         </span>
       </div>
@@ -105,7 +105,7 @@ export function initHeroParallax() {
     tx += (mx - tx) * 0.06;
     ty += (my - ty) * 0.06;
 
-    const dx = (tx - cx) / cx; // -1 … +1
+    const dx = (tx - cx) / cx;
     const dy = (ty - cy) / cy;
 
     // Seal drifts with cursor — slow, large layer

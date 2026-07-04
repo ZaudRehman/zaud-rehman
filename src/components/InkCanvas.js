@@ -27,39 +27,95 @@ export function initInk() {
   const mouse = { x: 0, y: 0 };
   const prevMouse = { x: 0, y: 0 };
   let rafId = null;
+  let frameCount = 0;
+
+  // Store strokes for clean redraw (avoids blend-mode fade conflicts)
+  const strokes = [];
+  let currentStroke = null;
 
   function init() {
     width = canvas.width = window.innerWidth;
     height = canvas.height = window.innerHeight;
   }
 
-  function animate() {
-    ctx.globalCompositeOperation = 'destination-out';
-    ctx.fillStyle = `rgba(255, 255, 255, ${1 - config.fade})`;
-    ctx.fillRect(0, 0, width, height);
-    
-    ctx.globalCompositeOperation = 'source-over';
-    
-    const inkColor = getInkColor();
-
-    ctx.beginPath();
-    ctx.strokeStyle = inkColor;
-    ctx.lineWidth = config.width;
+  function drawStrokes() {
+    ctx.clearRect(0, 0, width, height);
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
-    ctx.moveTo(prevMouse.x, prevMouse.y);
-    ctx.lineTo(mouse.x, mouse.y);
-    ctx.stroke();
 
-    const speed = Math.hypot(mouse.x - prevMouse.x, mouse.y - prevMouse.y);
-    if (speed > 15 && Math.random() > 0.5) {
-      const spread = Math.random() * 20 - 10;
-      ctx.fillStyle = inkColor;
+    for (let s = 0; s < strokes.length; s++) {
+      const stroke = strokes[s];
+      const age = (frameCount - stroke.startFrame) / stroke.lifetime;
+
+      if (age >= 1) continue; // fully faded
+
+      const alpha = 1 - age;
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = stroke.color;
+      ctx.lineWidth = config.width;
       ctx.beginPath();
-      ctx.arc(mouse.x + spread, mouse.y + spread, Math.random() * 2, 0, Math.PI * 2);
-      ctx.fill();
+
+      for (let i = 0; i < stroke.points.length; i++) {
+        const p = stroke.points[i];
+        if (i === 0) ctx.moveTo(p.x, p.y);
+        else ctx.lineTo(p.x, p.y);
+      }
+
+      ctx.stroke();
+
+      // Draw splatters
+      for (const sp of stroke.splatters) {
+        const splatAge = (frameCount - sp.frame) / stroke.lifetime;
+        if (splatAge >= 1) continue;
+        ctx.globalAlpha = (1 - splatAge) * 0.7;
+        ctx.fillStyle = stroke.color;
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, sp.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
     }
 
+    ctx.globalAlpha = 1;
+  }
+
+  function animate() {
+    frameCount++;
+
+    // Start new stroke on first movement
+    if (mouse.x !== prevMouse.x || mouse.y !== prevMouse.y) {
+      if (!currentStroke) {
+        currentStroke = {
+          points: [],
+          splatters: [],
+          color: getInkColor(),
+          startFrame: frameCount,
+          lifetime: 180, // ~3 seconds at 60fps
+        };
+        strokes.push(currentStroke);
+      }
+      currentStroke.points.push({ x: mouse.x, y: mouse.y });
+
+      // Splatter on fast movement
+      const speed = Math.hypot(mouse.x - prevMouse.x, mouse.y - prevMouse.y);
+      if (speed > 15 && Math.random() > 0.5) {
+        const spread = Math.random() * 20 - 10;
+        currentStroke.splatters.push({
+          x: mouse.x + spread,
+          y: mouse.y + spread,
+          r: Math.random() * 2,
+          frame: frameCount,
+        });
+      }
+    } else {
+      currentStroke = null;
+    }
+
+    // Remove fully faded strokes to free memory
+    while (strokes.length > 0 && (frameCount - strokes[0].startFrame) > strokes[0].lifetime) {
+      strokes.shift();
+    }
+
+    drawStrokes();
     prevMouse.x = mouse.x;
     prevMouse.y = mouse.y;
 

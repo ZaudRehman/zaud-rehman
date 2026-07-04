@@ -202,12 +202,12 @@ body.night-mode ::-webkit-scrollbar-thumb { background: #6d7f9e; }
 }
 
 body.night-mode #hero-dragon-seal {
-  opacity: 0.08;
+  opacity: 0.1;
   color: var(--accent-color);
 }
 
 body.night-mode #hero-branch {
-  opacity: 0.15;
+  opacity: 0.18;
   color: #a4b5cf;
 }
 
@@ -712,6 +712,8 @@ body.night-mode .text-charcoal\/15 { color: var(--text-secondary); }
 body.night-mode .text-charcoal\/12 { color: var(--text-secondary); }
 body.night-mode .text-charcoal\/25 { color: var(--text-secondary); }
 body.night-mode .text-charcoal\/20 { color: var(--text-secondary); }
+body.night-mode .text-charcoal\/40 { color: var(--text-secondary); }
+body.night-mode .text-charcoal\/35 { color: var(--text-secondary); }
 
 /* ── Global border variants not yet covered ────────────────── */
 body.night-mode .border-charcoal\/12 { border-color: var(--border-color); }
@@ -779,21 +781,45 @@ body.night-mode #dot-nav .dot-nav-dot.bg-sepia {
   box-shadow: 0 6px 20px var(--shadow-color);
 }
 
-.footer-petal {
-  animation: footerDrift 8s ease-in-out infinite;
+/* ── Flora garden ─────────────────────────────────────────── */
+.flora-img {
+  mix-blend-mode: multiply;
 }
 
-.footer-petal--delayed {
-  animation-delay: 3s;
-  animation-duration: 10s;
+.flora-fade {
+  background: linear-gradient(to top, var(--bg-color) 0%, transparent 100%);
 }
 
-@keyframes footerDrift {
-  0%   { transform: translate(0, 0) rotate(0deg); opacity: 0; }
-  10%  { opacity: 0.45; }
-  50%  { transform: translate(40px, 60px) rotate(45deg); opacity: 0.3; }
-  90%  { opacity: 0.45; }
-  100% { transform: translate(80px, 120px) rotate(90deg); opacity: 0; }
+.flora-sway {
+  animation: floraSway 6s ease-in-out infinite;
+  transform-origin: top center;
+}
+
+.flora-sway:nth-child(2n) {
+  animation-duration: 7s;
+  animation-delay: -2s;
+}
+
+.flora-sway:nth-child(3n) {
+  animation-duration: 8s;
+  animation-delay: -4s;
+}
+
+@keyframes floraSway {
+  0%, 100% { transform: rotate(0deg) translateX(0); }
+  25% { transform: rotate(0.6deg) translateX(2px); }
+  75% { transform: rotate(-0.6deg) translateX(-2px); }
+}
+
+/* Night mode: flowers visible on dark background */
+body.night-mode .flora-img {
+  mix-blend-mode: normal;
+  filter: brightness(0.85) saturate(0.75) contrast(0.9);
+  opacity: 0.65 !important;
+}
+
+body.night-mode .flora-fade {
+  background: linear-gradient(to top, var(--bg-color) 0%, transparent 100%);
 }
 
 body.night-mode .footer-scrap {
@@ -801,7 +827,176 @@ body.night-mode .footer-scrap {
   border-color: rgba(155, 178, 214, 0.12);
 }
 
+body.night-mode .footer-scrap span {
+  color: var(--text-secondary);
+}
+
+body.night-mode .footer-scrap:hover span {
+  color: var(--text-primary);
+}
+
+body.night-mode .footer-scrap svg {
+  color: var(--accent-color);
+}
+
 body.night-mode .footer-scrap:hover {
   border-color: rgba(216, 184, 106, 0.3);
   box-shadow: 0 8px 24px rgba(3, 8, 20, 0.3);
+}
+
+/* ── Contact modal ───────────────────────────────────────── */
+.contact-modal-panel {
+  animation: contactLetterOpen 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes contactLetterOpen {
+  from { opacity: 0; transform: scale(0.96) translateY(12px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.contact-modal-decor {
+  background: var(--card-bg-soft);
+  border-right: 1px solid var(--border-color);
+}
+
+.contact-modal-ink-flourish {
+  animation: inkFlourishGrow 0.8s 0.2s ease-out both;
+}
+
+@keyframes inkFlourishGrow {
+  from { transform: scaleY(0); opacity: 0; }
+  to { transform: scaleY(1); opacity: 0.2; }
+}
+
+.contact-input-wrap {
+  position: relative;
+}
+
+.contact-input-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 1.5px;
+  background: var(--accent-color);
+  transition: width 0.3s ease, left 0.3s ease;
+}
+
+.contact-input-wrap:focus-within::after {
+  width: 100%;
+  left: 0;
+}
+
+.contact-send-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-send-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+  z-index: -1;
+}
+
+.contact-send-btn:hover::before {
+  transform: scaleX(1);
+}
+
+.contact-close-btn {
+  transition: color 0.2s ease, letter-spacing 0.2s ease;
+}
+
+.contact-close-btn:hover {
+  letter-spacing: 0.15em;
+}
+
+/* Staggered input entrance */
+.contact-modal-panel .contact-input-wrap:nth-child(1) { animation: contactFieldIn 0.3s 0.05s ease-out both; }
+.contact-modal-panel .contact-input-wrap:nth-child(2) { animation: contactFieldIn 0.3s 0.1s ease-out both; }
+.contact-modal-panel .contact-input-wrap:nth-child(3) { animation: contactFieldIn 0.3s 0.15s ease-out both; }
+.contact-modal-panel .contact-input-wrap:nth-child(4) { animation: contactFieldIn 0.3s 0.2s ease-out both; }
+
+@keyframes contactFieldIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#contact-modal input,
+#contact-modal textarea {
+  background: transparent;
+}
+
+body.night-mode #contact-modal .contact-modal-panel {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.night-mode #contact-modal .contact-modal-decor {
+  background: rgba(27, 36, 53, 0.5);
+  border-color: rgba(155, 178, 214, 0.1);
+}
+
+body.night-mode #contact-modal .contact-modal-decor p {
+  color: var(--text-secondary);
+}
+
+body.night-mode #contact-modal .contact-modal-decor .text-sepia {
+  color: var(--accent-color);
+}
+
+body.night-mode #contact-modal input,
+body.night-mode #contact-modal textarea {
+  color: var(--text-primary);
+  border-color: rgba(155, 178, 214, 0.15);
+}
+
+body.night-mode #contact-modal input:focus,
+body.night-mode #contact-modal textarea:focus {
+  border-color: var(--accent-color);
+}
+
+body.night-mode #contact-modal .contact-input-wrap::after {
+  background: var(--accent-color);
+}
+
+body.night-mode #contact-modal input::placeholder,
+body.night-mode #contact-modal textarea::placeholder {
+  color: rgba(186, 197, 216, 0.3);
+}
+
+body.night-mode #contact-modal h3 {
+  color: var(--text-primary);
+}
+
+body.night-mode #contact-modal label {
+  color: var(--text-secondary);
+}
+
+body.night-mode #contact-modal .contact-close-btn {
+  color: var(--text-secondary);
+}
+
+body.night-mode #contact-modal .contact-close-btn:hover {
+  color: var(--text-primary);
+}
+
+body.night-mode #contact-modal .contact-send-btn {
+  border-color: rgba(216, 184, 106, 0.3);
+  color: rgba(216, 184, 106, 0.7);
+}
+
+body.night-mode #contact-modal .contact-send-btn:hover {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--card-bg);
+}
+
+body.night-mode #contact-modal .contact-send-btn::before {
+  background: var(--accent-color);
 }
