@@ -588,6 +588,78 @@ body.night-mode .forge-panel {
   .forge-panel { height: 95vh; border-radius: 4px; }
   .forge-workspace { grid-template-columns: 1fr !important; }
   .ws-editor-divider { display: none !important; }
+
+  .forge-titlebar {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  .forge-titlebar > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .forge-titlebar > div:last-child {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .forge-titlebar > div:last-child::-webkit-scrollbar { display: none; }
+
+  .forge-titlebar .w-px { display: none; }
+
+  .forge-titlebar .forge-lang-badge { display: none; }
+
+  .ws-langbar {
+    padding: 0.35rem 0.75rem !important;
+    gap: 0.15rem !important;
+    flex-wrap: nowrap;
+  }
+
+  .ws-langbar .ml-auto { display: none !important; }
+
+  .ws-statusbar {
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem !important;
+  }
+
+  .ws-statusbar > div:first-child {
+    flex: 1 1 auto;
+    min-width: 0;
+    gap: 0.5rem;
+  }
+
+  .ws-statusbar > div:last-child {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    gap: 0.25rem;
+    min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .ws-statusbar > div:last-child::-webkit-scrollbar { display: none; }
+
+  .ws-statusbar .forge-status-btn svg { display: none; }
+
+  .ws-run-btn {
+    padding: 0.35rem 0.75rem !important;
+    font-size: 10px !important;
+  }
+
+  .ws-run-btn > span:first-child { display: none; }
+
+  .forge-terminal { padding: 0.35rem 0.75rem !important; }
 }
 
 body.night-mode .forge-titlebar {
