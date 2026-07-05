@@ -10,7 +10,7 @@ import Manifesto, { initManifesto } from './components/Manifesto';
 import TechStack, { initTechStack } from './components/TechStack';
 import ProjectsGrid from './components/ProjectsGrid';
 import ErraLab from './components/ErraLab';
-import BloomCraftLab from './components/BloomCraftLab';
+import BloomCraftLab, { initBloomCraftLab } from './components/BloomCraftLab';
 import Footer from './components/Footer';
 import PoetryDrawer from './components/PoetryDrawer';
 import BootSequence, { runBootSequence } from './components/BootSequence';
@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initDayNight();
     initManifesto();
     initTechStack(lenis);
+    initBloomCraftLab(lenis);
     initDotNav(lenis);
     initHeroParallax();
     initDraggableNote();

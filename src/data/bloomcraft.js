@@ -40,7 +40,7 @@ export const bloomcraft = {
         features: [
           "All k hash lookups within a single 64-byte block",
           "Guarantees at most one cache miss per query",
-          "~1.3–1.5× memory overhead for maximum query speed"
+          "~1.3 to 1.5x memory overhead for maximum query speed"
         ],
         use_case: "High-throughput latency-sensitive systems",
         file: "register_blocked.rs"
@@ -137,7 +137,7 @@ export const bloomcraft = {
         features: [
           "1–2 cache misses per query vs k random misses",
           "Cache-line-aligned partition boundaries",
-          "~2–5% higher FPR in exchange for ~2× query throughput",
+          "~2 to 5% higher FPR in exchange for ~2x query throughput",
           "Auto-tuned partition alignment via CPU cache detection"
         ],
         use_case: "Query-heavy workloads with cache-fit working sets",
