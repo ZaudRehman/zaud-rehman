@@ -63,14 +63,20 @@ export default function Manifesto() {
         <div class="grid md:grid-cols-2 gap-10 md:gap-16 mb-14">
           <div>
             <p class="font-serif text-lg md:text-xl text-charcoal/80 leading-relaxed mb-6">
-              Right now, I’m building
+              Right now, I'm building
               <span class="font-mono text-sm text-sepia bg-sepia/8 px-1.5 py-0.5 rounded-sm border border-sepia/15">AchronOS</span>,
-              a deterministic kernel. I’m also exploring probabilistic data structures in Rust, mostly because I enjoy systems work that rewards precision.
+              a deterministic kernel. I'm also exploring probabilistic data structures in Rust, mostly because I enjoy systems work that rewards precision.
             </p>
 
-            <p class="font-serif text-base text-charcoal/60 leading-relaxed">
-              I’m especially drawn to backend and systems problems, distributed coordination, concurrency, low-level execution, and performance work where the details actually matter.
+            <p class="font-serif text-base text-charcoal/60 leading-relaxed mb-4">
+              I'm especially drawn to backend and systems problems, distributed coordination, concurrency, low-level execution, and performance work where the details actually matter.
             </p>
+
+            <a href="https://zaud-rehman.hashnode.dev/" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-1.5 font-mono text-[11px] text-charcoal/40 hover:text-sepia transition-colors">
+              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M1 9L9 1M9 1H3M9 1v6"/></svg>
+              More on the blog
+            </a>
           </div>
 
           <div class="relative">
@@ -80,9 +86,9 @@ export default function Manifesto() {
 
               <p class="font-serif text-base text-charcoal/75 italic leading-relaxed">
                 I write too. Mostly poetry.
-                <span class="font-mono text-xs text-sepia not-italic">Gazebound</span>
+                <button class="poetry-link font-mono text-xs text-sepia not-italic hover:underline cursor-pointer" data-poem="gazebound">Gazebound</button>
                 and
-                <span class="font-mono text-xs text-sepia not-italic">Afsaana</span>
+                <button class="poetry-link font-mono text-xs text-sepia not-italic hover:underline cursor-pointer" data-poem="afsaana">Afsaana</button>
                 are two collections that matter a lot to me.
               </p>
 

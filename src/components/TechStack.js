@@ -492,6 +492,7 @@ export function initTechStack(lenis) {
   // ── Overlay open/close ──
   function closeOverlay() {
     forgeOverlay?.classList.remove('forge-open');
+    document.body.classList.remove('forge-open');
     document.body.style.overflow = '';
     if (lenis) lenis.start();
     if (isFullscreen && document.fullscreenElement) document.exitFullscreen();
@@ -500,6 +501,7 @@ export function initTechStack(lenis) {
   if (forgeOverlay && openBtn && closeBtn) {
     openBtn.addEventListener('click', () => {
       forgeOverlay.classList.add('forge-open');
+      document.body.classList.add('forge-open');
       document.body.style.overflow = 'hidden';
       if (lenis) lenis.stop();
       setTimeout(() => editor?.focus(), 100);
@@ -674,6 +676,7 @@ export function initTechStack(lenis) {
           // Auto-open overlay
           if (forgeOverlay) {
             forgeOverlay.classList.add('forge-open');
+            document.body.classList.add('forge-open');
             document.body.style.overflow = 'hidden';
             if (lenis) lenis.stop();
             setTimeout(() => editor?.focus(), 100);

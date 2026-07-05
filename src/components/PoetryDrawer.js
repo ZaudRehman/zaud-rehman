@@ -6,9 +6,11 @@ export default function PoetryDrawer() {
     <button
       id="poetry-trigger"
       class="poetry-trigger fixed bottom-6 right-6 z-40 p-3 bg-paper border border-sepia/30 rounded-full shadow-lg hover:rotate-12 transition-transform cursor-pointer group"
-      title="Open the drawer"
+      title="Open the drawer (P)"
     >
       <span class="text-2xl group-hover:animate-pulse">🕯️</span>
+      <span class="poetry-hint absolute -top-8 left-1/2 -translate-x-1/2 font-serif text-[10px] text-sepia/60 italic whitespace-nowrap opacity-0 transition-opacity duration-500 pointer-events-none">Gazebound</span>
+      <span class="absolute -top-1 -right-1 font-mono text-[8px] text-charcoal/30 bg-paper border border-charcoal/10 rounded w-3.5 h-3.5 flex items-center justify-center leading-none">P</span>
     </button>
 
     <!-- Overlay -->

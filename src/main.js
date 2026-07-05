@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initDayNight();
     initManifesto();
     initTechStack(lenis);
-    initBloomCraftLab(lenis);
+    initBloomCraftLab();
     initDotNav(lenis);
     initHeroParallax();
     initDraggableNote();
@@ -252,6 +252,35 @@ function setupInteractions() {
     if (e.key === 'Escape' && drawer?.classList.contains('drawer-open')) {
       toggleDrawer(false);
     }
+    if (e.key === 'p' || e.key === 'P') {
+      const active = document.activeElement;
+      const isInput = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA');
+      if (!isInput && !drawer?.classList.contains('forge-open')) {
+        toggleDrawer(!drawer?.classList.contains('drawer-open'));
+      }
+    }
+  });
+
+  // Poetry scroll hint - show "Gazebound" label when Manifesto enters viewport
+  const manifesto = document.getElementById('manifesto');
+  const poetryHint = document.querySelector('.poetry-hint');
+  if (manifesto && poetryHint && !sessionStorage.getItem('poetry-hint-seen')) {
+    const hintObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          poetryHint.style.opacity = '1';
+          sessionStorage.setItem('poetry-hint-seen', '1');
+          setTimeout(() => { poetryHint.style.opacity = '0'; }, 4000);
+          hintObserver.disconnect();
+        }
+      });
+    }, { threshold: 0.3 });
+    hintObserver.observe(manifesto);
+  }
+
+  // Clickable poetry names in Manifesto
+  document.querySelectorAll('.poetry-link').forEach(btn => {
+    btn.addEventListener('click', () => toggleDrawer(true));
   });
 
   // Contact modal

@@ -1428,6 +1428,14 @@ body.night-mode .poetry-trigger {
   box-shadow: 0 18px 36px rgba(3, 8, 20, 0.42);
 }
 
+body.forge-open .poetry-trigger {
+  display: none;
+}
+
+body.night-mode .poetry-trigger .poetry-hint {
+  color: rgba(216, 184, 106, 0.6);
+}
+
 .poetry-overlay {
   background: var(--poetry-overlay);
 }
