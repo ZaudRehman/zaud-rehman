@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initInk();
     initDayNight();
     initManifesto();
-    initTechStack();
+    initTechStack(lenis);
     initDotNav(lenis);
     initHeroParallax();
     initDraggableNote();

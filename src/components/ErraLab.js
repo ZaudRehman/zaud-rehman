@@ -1,5 +1,21 @@
 import { erra } from '../data/erra.js';
 
+function renderErraCode(code) {
+  const kw = (t) => `<span class="opacity-50">${t}</span>`;
+  const str = (t) => `<span class="text-sepia">"${t}"</span>`;
+  const fn = (t) => `<span class="text-charcoal font-bold">${t}</span>`;
+  const hi = (t) => `<span class="erra-highlight px-1 py-0.5 rounded transition-colors duration-300 relative">${t}</span>`;
+
+  return [
+    `${kw('fn')} ${fn(code.title)}() ${kw('->')} Result&lt;Config, Error&lt;io::Error&gt;&gt; {`,
+    `    fs::read_to_string(${str(code.source_file)})`,
+    `        ${hi(`${kw('.') }annotate(${str(code.annotation)})?`)};`,
+    ``,
+    `    ${kw('// ...')}`,
+    `}`,
+  ].join('\n');
+}
+
 export default function ErraLab() {
   return `
     <section id="erra" class="erra-shell py-14 md:py-32 relative overflow-hidden mb-20 border-y border-charcoal/10 bg-paper-dark/30">
@@ -40,16 +56,16 @@ export default function ErraLab() {
               <p class="font-mono text-xs text-charcoal/50 mb-4 md:mb-6 uppercase tracking-widest flex items-center gap-2">
                 <span class="w-1.5 h-1.5 rounded-full border border-sepia"></span> The Manuscript
               </p>
-              <pre class="erra-code font-mono text-[10px] sm:text-[11px] md:text-[13px] p-3 sm:p-4 md:p-6 rounded-sm overflow-x-auto leading-loose border border-charcoal/10 shadow-inner max-w-full"><code><span class="opacity-50">fn</span> <span class="text-charcoal font-bold">${erra.code.title}</span>() <span class="opacity-50">-></span> Result&lt;Config, Error&lt;io::Error&gt;&gt; {
-    fs::read_to_string(<span class="text-sepia">"${erra.code.source_file}"</span>)
-        <span class="erra-highlight px-1 py-0.5 rounded transition-colors duration-300 relative">.annotate(<span class="text-sepia">"${erra.code.annotation}"</span>)?</span>;
-
-    <span class="opacity-50">// ...</span>
-}</code></pre>
+              <pre class="erra-code font-mono text-[10px] sm:text-[11px] md:text-[13px] p-3 sm:p-4 md:p-6 rounded-sm overflow-x-auto leading-loose border border-charcoal/10 shadow-inner max-w-full"><code>${renderErraCode(erra.code)}</code></pre>
             </div>
 
             <button id="trigger-erra-btn" class="erra-solid-btn w-full md:w-auto self-start mt-6 md:mt-8 px-5 md:px-6 py-3 font-mono text-sm tracking-wider transition-all duration-300 flex items-center gap-3 group">
-              <span class="group-hover:rotate-12 transition-transform">🖋️</span> Trace Ink
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:rotate-12 transition-transform">
+                <path d="M10 1.5l2.5 2.5-7 7H3v-2.5l7-7z"/>
+                <path d="M8.5 3l2.5 2.5" opacity="0.4"/>
+                <path d="M3 12.5h8" opacity="0.3"/>
+              </svg>
+              Trace Ink
             </button>
           </div>
 
