@@ -8,7 +8,7 @@ import Lenis from 'lenis';
 import Hero, { initHeroParallax } from './components/Hero';
 import Manifesto, { initManifesto } from './components/Manifesto';
 import TechStack, { initTechStack } from './components/TechStack';
-import ProjectsGrid from './components/ProjectsGrid';
+import ProjectsGrid, { initProjectsGrid, setLenis } from './components/ProjectsGrid';
 import ErraLab from './components/ErraLab';
 import BloomCraftLab, { initBloomCraftLab } from './components/BloomCraftLab';
 import Footer from './components/Footer';
@@ -75,6 +75,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initBloomCraftLab();
     initDotNav(lenis);
     initHeroParallax();
+    initProjectsGrid();
+    setLenis(lenis);
     initDraggableNote();
     runHeroIntro();
     initScrollAnimations();

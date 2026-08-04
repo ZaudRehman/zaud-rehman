@@ -382,7 +382,7 @@ export default function TechStack() {
           `<div class="flex justify-between"><span class="text-charcoal/50">Insert tab</span><span class="text-charcoal/30">Tab</span></div>` +
           `<div class="flex justify-between"><span class="text-charcoal/50">Help</span><span class="text-charcoal/30">?</span></div>` +
         `</div>` +
-        `<div class="mt-4 pt-3 border-t border-charcoal/8 font-mono text-[9px] text-charcoal/20">The Workshop — multi-language code runner</div>` +
+        `<div class="mt-4 pt-3 border-t border-charcoal/8 font-mono text-[9px] text-charcoal/20">The Workshop, multi-language code runner</div>` +
       `</div>` +
     `</div>` +
   `</section>`;
@@ -863,7 +863,7 @@ export function initTechStack(lenis) {
         status.textContent = 'cleared';
         status.className = 'font-mono text-[10px] text-charcoal/30';
       } else if (cmd === 'help') {
-        output.value = 'Commands:\n  run / exec   — execute code\n  clear / cls   — clear output\n  lang <name>   — switch language\n  history       — recent executions\n  help          — show this message\n  whoami        — about the forge';
+        output.value = 'Commands:\n  run / exec   | execute code\n  clear / cls   | clear output\n  lang <name>   | switch language\n  history       | recent executions\n  help          | show this message\n  whoami        | about the forge';
         output.className = 'ws-output ws-output-success';
       } else if (cmd.startsWith('lang ')) {
         const name = cmd.slice(5).trim();
@@ -889,7 +889,7 @@ export function initTechStack(lenis) {
             const t = new Date(ex.time).toLocaleTimeString();
             const lang = LANGUAGES.find(l => l.id === ex.lang);
             const preview = ex.code.split('\n')[0].substring(0, 50);
-            return `${i + 1}. [${t}] ${lang?.label || ex.lang} — ${preview}…`;
+            return `${i + 1}. [${t}] ${lang?.label || ex.lang}: ${preview}…`;
           });
           output.value = `Recent executions:\n${lines.join('\n')}`;
           output.className = 'ws-output ws-output-success';

@@ -2128,3 +2128,264 @@ body.night-mode .forge-terminal-prompt {
 .forge-lines {
   z-index: 1;
 }
+
+/* ── Works bento grid ──────────────────────────────────────── */
+.bento-card {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s ease,
+    box-shadow 0.4s ease;
+  will-change: transform;
+}
+
+.bento-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 2px 4px rgba(139, 115, 85, 0.04),
+    0 8px 24px rgba(139, 115, 85, 0.08),
+    0 20px 48px rgba(0, 0, 0, 0.06);
+  border-color: rgba(139, 115, 85, 0.22);
+}
+
+.bento-card-featured {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(139, 115, 85, 0.03), transparent 32%),
+    var(--bg-color);
+}
+
+.bento-card-featured:hover {
+  box-shadow:
+    0 2px 4px rgba(139, 115, 85, 0.04),
+    0 12px 32px rgba(139, 115, 85, 0.1),
+    0 28px 64px rgba(0, 0, 0, 0.07);
+}
+
+/* Link pills */
+.bento-link-pill {
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.25s ease;
+}
+
+.bento-link-pill:hover {
+  border-color: rgba(139, 115, 85, 0.4);
+  box-shadow: 0 2px 8px rgba(139, 115, 85, 0.08);
+}
+
+/* Stack pills */
+.bento-stack-pill {
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.bento-stack-pill:hover {
+  background: rgba(139, 115, 85, 0.1);
+  border-color: rgba(139, 115, 85, 0.3);
+  color: rgba(139, 115, 85, 0.95);
+}
+
+/* Title accent line on hover */
+.bento-title-accent {
+  position: relative;
+}
+
+.bento-title-accent::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: rgba(139, 115, 85, 0.3);
+  transition: width 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bento-card:hover .bento-title-accent::after {
+  width: 48px;
+}
+
+/* Arrow button */
+.bento-toggle-btn {
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+  border-radius: 4px;
+}
+
+.bento-toggle-btn:hover {
+  background: rgba(139, 115, 85, 0.06);
+  color: rgba(139, 115, 85, 0.9);
+}
+
+/* Stat grid hover */
+.bento-stat-cell {
+  transition: background 0.2s ease;
+}
+
+.bento-stat-cell:hover {
+  background: rgba(139, 115, 85, 0.02);
+}
+
+/* Divider */
+.bento-detail-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(139, 115, 85, 0.12) 20%,
+    rgba(139, 115, 85, 0.12) 80%,
+    transparent
+  );
+}
+
+/* ── Project detail overlay ────────────────────────────────── */
+.po-detail-panel {
+  box-shadow:
+    0 1px 0 rgba(139, 115, 85, 0.05),
+    0 4px 16px rgba(69, 53, 36, 0.06),
+    0 24px 80px rgba(0, 0, 0, 0.18);
+}
+
+.po-detail-scroll::-webkit-scrollbar { width: 5px; }
+.po-detail-scroll::-webkit-scrollbar-track { background: transparent; }
+.po-detail-scroll::-webkit-scrollbar-thumb {
+  background: rgba(139, 115, 85, 0.2);
+  border-radius: 3px;
+}
+.po-detail-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 115, 85, 0.35);
+}
+
+/* ── Night mode ── */
+body.night-mode .bento-card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+body.night-mode .bento-card:hover {
+  border-color: rgba(216, 184, 106, 0.28);
+  box-shadow:
+    0 2px 4px rgba(3, 8, 20, 0.12),
+    0 10px 28px rgba(3, 8, 20, 0.18),
+    0 28px 64px rgba(0, 0, 0, 0.15);
+}
+
+body.night-mode .bento-card-featured {
+  background:
+    radial-gradient(circle at 88% 12%, rgba(216, 184, 106, 0.04), transparent 32%),
+    var(--card-bg);
+}
+
+body.night-mode .bento-card-featured:hover {
+  box-shadow:
+    0 2px 4px rgba(3, 8, 20, 0.12),
+    0 12px 32px rgba(3, 8, 20, 0.22),
+    0 28px 64px rgba(0, 0, 0, 0.18);
+}
+
+body.night-mode .bento-link-pill:hover {
+  border-color: rgba(216, 184, 106, 0.4);
+  box-shadow: 0 2px 8px rgba(216, 184, 106, 0.08);
+}
+
+body.night-mode .bento-stack-pill:hover {
+  background: rgba(216, 184, 106, 0.08);
+  border-color: rgba(216, 184, 106, 0.3);
+  color: rgba(216, 184, 106, 0.9);
+}
+
+body.night-mode .bento-title-accent::after {
+  background: rgba(216, 184, 106, 0.3);
+}
+
+body.night-mode .bento-toggle-btn:hover {
+  background: rgba(216, 184, 106, 0.06);
+  color: rgba(216, 184, 106, 0.9);
+}
+
+body.night-mode .bento-stat-cell:hover {
+  background: rgba(216, 184, 106, 0.03);
+}
+
+body.night-mode .bento-detail-divider {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(216, 184, 106, 0.1) 20%,
+    rgba(216, 184, 106, 0.1) 80%,
+    transparent
+  );
+}
+
+body.night-mode .bento-card .bg-charcoal\/8 {
+  background: rgba(155, 178, 214, 0.1);
+}
+
+body.night-mode .bento-card .border-charcoal\/8,
+body.night-mode .bento-card .border-charcoal\/10,
+body.night-mode .bento-card .border-charcoal\/12 {
+  border-color: var(--border-color);
+}
+
+body.night-mode .po-detail-panel {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+  box-shadow:
+    0 1px 0 rgba(216, 184, 106, 0.03),
+    0 4px 16px rgba(0, 0, 0, 0.15),
+    0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+body.night-mode .po-detail-scroll::-webkit-scrollbar-thumb {
+  background: rgba(216, 184, 106, 0.2);
+}
+
+/* ── Bento tile night mode: missing utility overrides ──────── */
+body.night-mode .bento-card .text-charcoal\/45 { color: rgba(186, 197, 216, 0.45); }
+body.night-mode .bento-card .bg-charcoal\/4 { background: rgba(155, 178, 214, 0.06); }
+body.night-mode .bento-card .text-charcoal\/38 { color: rgba(186, 197, 216, 0.38); }
+body.night-mode .bento-card .text-charcoal\/28 { color: rgba(186, 197, 216, 0.28); }
+
+/* Overlay backdrop night mode */
+body.night-mode #project-detail-overlay .po-detail-backdrop { background: rgba(10, 14, 24, 0.55); }
+
+/* Overlay stat cells night mode */
+body.night-mode #project-detail-overlay .bg-paper { background: var(--card-bg); }
+body.night-mode #project-detail-overlay .text-charcoal\/40 { color: var(--text-secondary); }
+body.night-mode #project-detail-overlay .text-charcoal\/35 { color: var(--text-secondary); }
+
+/* Overlay status badge night mode */
+body.night-mode #project-detail-overlay .text-green-700\/60 { color: rgba(134, 204, 134, 0.75); }
+body.night-mode #project-detail-overlay .bg-green-800\/6 { background: rgba(34, 80, 34, 0.12); }
+body.night-mode #project-detail-overlay .border-green-800\/10 { border-color: rgba(34, 80, 34, 0.2); }
+
+/* Overlay close button night mode */
+body.night-mode #project-detail-overlay .text-charcoal\/30 { color: var(--text-secondary); }
+body.night-mode #project-detail-overlay .hover\:text-charcoal:hover { color: var(--text-primary); }
+
+/* Overlay link pills night mode */
+body.night-mode #project-detail-overlay .bento-link-pill { color: var(--text-secondary); border-color: var(--border-color); }
+body.night-mode #project-detail-overlay .bento-link-pill:hover { color: var(--accent-color); }
+
+/* Section header night mode (works for both tile and overlay) */
+body.night-mode #projects .text-charcoal\/60 { color: var(--text-secondary); }
+body.night-mode #projects .text-charcoal\/35 { color: var(--text-secondary); }
+body.night-mode #projects .bg-charcoal\/8 { background: rgba(155, 178, 214, 0.1); }
+
+/* Featured card ribbon night mode */
+body.night-mode #projects .via-sepia\/25 { --tw-gradient-via: rgba(216, 184, 106, 0.2); }
+
+/* Overlay highlight text + stack pill bg night mode */
+body.night-mode #project-detail-overlay .text-charcoal\/68 { color: var(--text-secondary); }
+body.night-mode #project-detail-overlay .bg-sepia\/6 { background: rgba(216, 184, 106, 0.06); }
+body.night-mode #project-detail-overlay .border-sepia\/15 { border-color: rgba(216, 184, 106, 0.15); }
+
+@media (max-width: 768px) {
+  .bento-card:hover {
+    transform: none;
+  }
+}

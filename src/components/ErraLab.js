@@ -23,7 +23,7 @@ export default function ErraLab() {
 
         <!-- Header -->
         <div class="mb-12 md:mb-16 relative">
-          <!-- Background Compass Stamp — hidden on mobile to prevent overflow -->
+          <!-- Background Compass Stamp, hidden on mobile to prevent overflow -->
           <div class="absolute -top-10 -left-6 opacity-20 erra-compass pointer-events-none hidden md:block">
             <svg width="100" height="100" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1">
               <circle cx="50" cy="50" r="40" stroke-dasharray="4 4"/>

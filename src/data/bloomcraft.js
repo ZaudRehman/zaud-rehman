@@ -159,7 +159,7 @@ export const bloomcraft = {
       {
         name: "ClassicHashBloomFilter",
         category: "Reference",
-        description: "Burton Bloom's Method 1 (1970) — hash table with chaining using k truly independent hash functions",
+        description: "Burton Bloom's Method 1 (1970), hash table with chaining using k truly independent hash functions",
         features: [
           "k independent hashes (academic standard)",
           "Hash table with chaining (not bit array)",
@@ -172,7 +172,7 @@ export const bloomcraft = {
       {
         name: "ClassicBitsBloomFilter",
         category: "Reference",
-        description: "Burton Bloom's Method 2 (1970) — bit array with k independent hashes (textbook algorithm)",
+        description: "Burton Bloom's Method 2 (1970), bit array with k independent hashes (textbook algorithm)",
         features: [
           "Bit array with k independent hash functions",
           "Standard textbook algorithm",
@@ -192,7 +192,7 @@ export const bloomcraft = {
         {
           name: "FNV-1a (StdHasher)",
           type: "Default Hasher",
-          description: "Deterministic FNV-1a implementation — fast, fixed constants, zero external dependencies",
+          description: "Deterministic FNV-1a implementation, fast, fixed constants, zero external dependencies",
           characteristics: [
             "Default hash for all filter types",
             "Deterministic across processes and Rust versions",
@@ -248,7 +248,7 @@ export const bloomcraft = {
           name: "EnhancedDoubleHashing",
           algorithm: "Kirsch-Mitzenmacher optimization with entropy mixing",
           formula: "h_i(x) = (h1(x) + i · h2(x) + f(i³)) mod m",
-          benefit: "Generates k indices from just 2 base hashes — 70% fewer hash computations",
+          benefit: "Generates k indices from just 2 base hashes, 70% fewer hash computations",
           research_paper: "Kirsch & Mitzenmacher (2006) - Less Hashing, Same Performance",
           implementation: "strategies.rs"
         },
@@ -263,7 +263,7 @@ export const bloomcraft = {
           name: "ClassicHashing",
           algorithm: "k truly independent hash functions (academic baseline)",
           formula: "h_i(x) = hash_i(x) mod m for i ∈ [0, k)",
-          benefit: "Maximum hash independence — benchmark reference",
+          benefit: "Maximum hash independence, benchmark reference",
           use_case: "Research comparisons, empirical validation",
           implementation: "strategies.rs"
         }

@@ -81,7 +81,7 @@ export default function PoetryDrawer() {
       <!-- Footer Note -->
       <div class="poetry-footer p-8 border-t border-charcoal/10">
         <p class="poetry-footer-note font-serif text-sm italic text-center">
-          "These are my pauses between commits." — ZR
+          "These are my pauses between commits." - ZR
         </p>
       </div>
     </aside>
